@@ -1,2 +1,2 @@
-<h1>DBMS Group Project</h1>
+<h1>Intelligent Course Management System - COMP3278 Group Project</h1>
 <h3>Group 33</h3>
