@@ -69,33 +69,38 @@ function Home() {
           </Card>
         </Col>
         <Col>
-          <Card
-            style={{
-              height: "200px",
-              width: "200px",
-              margin: "auto",
-              marginTop: "25%",
-              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-            }}
+          <Link
+            to="/weekly-schedule"
+            style={{ textDecoration: "none", color: "black" }}
           >
-            <Card.Body
+            <Card
               style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                textAlign: "right",
+                height: "200px",
+                width: "200px",
+                margin: "auto",
+                marginTop: "25%",
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               }}
             >
-              <img
-                src={weeklySchedule}
-                alt="Avatar"
+              <Card.Body
                 style={{
-                  marginTop: "8%",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  textAlign: "right",
                 }}
-              ></img>
-              <h3 style={{ fontWeight: "bold" }}>Weekly Schedule</h3>
-            </Card.Body>
-          </Card>
+              >
+                <img
+                  src={weeklySchedule}
+                  alt="Avatar"
+                  style={{
+                    marginTop: "8%",
+                  }}
+                ></img>
+                <h3 style={{ fontWeight: "bold" }}>Weekly Schedule</h3>
+              </Card.Body>
+            </Card>
+          </Link>
         </Col>
         <Col>
           <Link
