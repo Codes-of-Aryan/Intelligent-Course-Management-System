@@ -29,7 +29,33 @@ INSERT INTO `Student` VALUES (2, 'Goli', 'Smaran', 'golismaran4@gmail.com', 'Com
 ;""")
 
 
-#Create Other Tables Now:
+#Create Professor Table:
+con.execute("""
+    CREATE TABLE Professor (
+        StaffID int NOT NULL AUTO_INCREMENT,
+        Last_Name varchar(255) NOT NULL,
+        First_Name varchar(255) NOT NULL,
+        Email varchar(255) NOT NULL,
+        Department varchar(255) NOT NULL,
+
+        PRIMARY KEY (`StaffID`)
+);
+;""")
+
+
+con.execute("""
+    INSERT INTO Student VALUES ( 1 , 'Loretta', 'Choi', 'divtejbhatia17@gmail.com', 'Computer Science', 'Finance', 3, 'divtej.png') ;
+;""")
+
+con.execute("""
+INSERT INTO `Student` VALUES (2, 'Chim', 'T.W.', 'golismaran4@gmail.com', 'Computer Science', 'None', '3', 'smaran.png');
+;""")
+
+
+
+
+
+
 
 
 con.execute("""CREATE TABLE IF NOT EXISTS STUDENT (
