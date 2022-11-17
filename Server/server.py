@@ -40,7 +40,7 @@ def easy_execute():
 name = ["Divtej", "Bhatia"]
 
 
-@app.route('/welcome')
+@app.route('/')
 def index():
     return name
 
