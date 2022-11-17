@@ -51,6 +51,12 @@ INSERT INTO Student VALUES (2, 'Goli', 'Smaran', 'golismaran4@gmail.com','123456
 
 ;""")
 
+my_cursor("""
+
+INSERT INTO Student VALUES (3, 'Agarwal', 'Rahul', 'rahulaga2001@gmail.com','12345678' , 'Computer Science', 'Entrepreneurship', '3', 'rahul.png')
+
+;""")
+
 
 #Create Professor Table:
 my_cursor("""

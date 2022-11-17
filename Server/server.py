@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_mysql_connector import MySQL
 
+import mysql.connector
+
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -8,13 +10,13 @@ app = Flask(__name__)
 
 
 # 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:12345678@localhost/Alpha'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:mehyr@SIS11@localhost/Alpha'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_DATABASE'] = 'sys'
-mysql = MySQL(app)
+db = SQLAlchemy(app)
 
-EXAMPLE_SQL = 'select * from sys.user_summary'
 
+# Trying Simple Model of Student
 
 # using the new_cursor() method
 @app.route('/new_cursor')
@@ -42,12 +44,29 @@ def easy_execute():
     df = mysql.execute_sql(EXAMPLE_SQL, to_pandas=True)
     return str(df.to_dict())
 
-name = ["Divtej", "Bhatia"]
+ 
+mydb = mysql.connector.connect(
+    host = "localhost",
+    user = "root",
+    passwd = "mehyr@SIS11"
+)
+
+my_cursor = mydb.cursor()
 
 
-@app.route('/')
+my_cursor.execute(
+    "USE Alpha ; "
+)
+
+my_cursor.execute(
+    "SELECT First_Name FROM Student "
+)
+
+
+@app.route('/test')
 def index():
-    return name
+    for name in my_cursor:
+        return name
 
 if __name__ == '__main__':
     app.run(debug=True)

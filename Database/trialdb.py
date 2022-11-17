@@ -5,18 +5,30 @@ import mysql.connector
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    passwd = "12345678"
+    passwd = "mehyr@SIS11"
 )
 
 my_cursor = mydb.cursor()
 
-my_cursor(
-    "CREATE DATABASE Alpha"
-    )
 
 my_cursor.execute(
-    "SHOW DATABASES"
+    "USE Alpha ; "
 )
+
+
+my_cursor.execute("""
+
+    INSERT INTO Student VALUES ( 1 , 'Bhatia', 'Divtej Singh', 'divtejbhatia17@gmail.com','12345678' , 'Computer Science', 'Finance', 3, 'divtej.png') 
+
+;"""
+
+)
+
+
+my_cursor.execute(
+    "SELECT First_Name FROM Student "
+)
+
 
 for db in my_cursor:
     print(db)
