@@ -49,7 +49,7 @@ app = Flask(__name__)
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    passwd = "mehyr@SIS11"
+    passwd = "ADD PASS"
 )
 
 my_cursor = mydb.cursor()
@@ -66,9 +66,12 @@ my_cursor.execute(
 
 @app.route('/test')
 def index():
-    for x in my_cursor:
-        if x[0] == 'Smaran' :
-            return(x[0])
+    # for x in my_cursor:
+    #     if x[0] == 'Smaran' :
+    #         name = [x[0], ""]
+    #         return(name)
+    name = ["Smaran", "Goli"]
+    return name
         
 
 

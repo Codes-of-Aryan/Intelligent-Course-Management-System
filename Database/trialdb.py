@@ -5,7 +5,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    passwd = "mehyr@SIS11"
+    passwd = "ADD PASS"
 )
 
 my_cursor = mydb.cursor()
@@ -20,4 +20,7 @@ my_cursor.execute(
 )
 
 
+for x in my_cursor:
+    if x[0] == 'Smaran' :
+        print( type(x[0]))
 
