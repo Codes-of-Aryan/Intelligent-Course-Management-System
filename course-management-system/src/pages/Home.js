@@ -40,33 +40,38 @@ function Home() {
       </Row>
       <Row style={{ height: "50vh", marginLeft: "10%", marginRight: "10%" }}>
         <Col>
-          <Card
-            style={{
-              height: "200px",
-              width: "200px",
-              margin: "auto",
-              marginTop: "25%",
-              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-            }}
+          <Link
+            to="/my-courses"
+            style={{ textDecoration: "none", color: "black" }}
           >
-            <Card.Body
+            <Card
               style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                textAlign: "right",
+                height: "200px",
+                width: "200px",
+                margin: "auto",
+                marginTop: "25%",
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               }}
             >
-              <img
-                src={myCourses}
-                alt="Avatar"
+              <Card.Body
                 style={{
-                  marginTop: "8%",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  textAlign: "right",
                 }}
-              ></img>
-              <h3 style={{ fontWeight: "bold" }}>My Courses</h3>
-            </Card.Body>
-          </Card>
+              >
+                <img
+                  src={myCourses}
+                  alt="Avatar"
+                  style={{
+                    marginTop: "8%",
+                  }}
+                ></img>
+                <h3 style={{ fontWeight: "bold" }}>My Courses</h3>
+              </Card.Body>
+            </Card>
+          </Link>
         </Col>
         <Col>
           <Link

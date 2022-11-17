@@ -4,7 +4,7 @@ import WeeklySchedule from "./pages/WeeklySchedule";
 import Home from "./pages/Home";
 import LoginActivity from "./pages/LoginActivity";
 import Welcome from "./pages/Welcome";
-import MyProfile from "./pages/MyProfile";
+import MyCourses from "./pages/MyCourses";
 
 function AppRoutes() {
   return (
@@ -15,7 +15,7 @@ function AppRoutes() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/login-activity" element={<LoginActivity />} />
                 <Route path="/weekly-schedule" element={<WeeklySchedule />} />
-                <Route path="/my-profile" element={<MyProfile />} />
+                <Route path="/my-courses" element={<MyCourses />} />
             </Routes>
         </Router>
     </>
