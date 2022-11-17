@@ -1,8 +1,14 @@
 from flask import Flask
 from flask_mysql_connector import MySQL
 
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
 app = Flask(__name__)
 
+
+# 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:12345678@localhost/Alpha'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_DATABASE'] = 'sys'
 mysql = MySQL(app)

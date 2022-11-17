@@ -1,11 +1,22 @@
-import sqlite3
+import mysql.connector
 # Connects to database
 # The .db file is created automatically if it does not exist 
  
-con = sqlite3.connect('my-db.db')
+mydb = mysql.connector.connect(
+    host = "localhost",
+    user = "root",
+    passwd = "12345678"
+)
+
+my_cursor = mydb.cursor()
+
+my_cursor(
+    "CREATE DATABASE Alpha"
+    )
 
 #Create Student Table
-con.execute("""
+my_cursor(
+    """
 
     CREATE TABLE Student (
         UID int NOT NULL ,
@@ -22,17 +33,19 @@ con.execute("""
 
         Image_Filename varchar(255) NOT NULL,
 
-        PRIMARY KEY (`UID`)
-); """)
+        PRIMARY KEY (UID)
+    ); 
+
+""")
 
 
-con.execute("""
+my_cursor("""
 
     INSERT INTO Student VALUES ( 1 , 'Bhatia', 'Divtej Singh', 'divtejbhatia17@gmail.com','12345678' , 'Computer Science', 'Finance', 3, 'divtej.png') 
 
 ;""")
 
-con.execute("""
+my_cursor("""
 
 INSERT INTO Student VALUES (2, 'Goli', 'Smaran', 'golismaran4@gmail.com','12345678' , 'Computer Science', 'None', '3', 'smaran.png')
 
@@ -40,7 +53,7 @@ INSERT INTO Student VALUES (2, 'Goli', 'Smaran', 'golismaran4@gmail.com','123456
 
 
 #Create Professor Table:
-con.execute("""
+my_cursor("""
 
     CREATE TABLE Professor (
         StaffID int NOT NULL ,
@@ -55,21 +68,21 @@ con.execute("""
 ;""")
 
 
-con.execute("""
+my_cursor("""
     INSERT INTO Professor VALUES ( 1 , 'Ping', 'Luo', 'luoping@gmail.com') 
 ;""")
 
-con.execute("""
+my_cursor("""
 INSERT INTO Professor VALUES (2, 'Tam', 'Anthony', 'anthony@gmail.com')
 ;""")
 
-con.execute("""
+my_cursor("""
 INSERT INTO Professor VALUES (3, 'Chan', 'Hubert', 'hubertchan@gmail.com')
 ;""")
 
 
 #Create Course Table:
-con.execute("""
+my_cursor("""
 
     CREATE TABLE Course (
         CourseID varchar(255) NOT NULL ,
@@ -94,7 +107,7 @@ con.execute("""
 ;""")
 
 # Insert data into course table
-con.execute("""
+my_cursor("""
 
 INSERT INTO Course VALUES ('COMP3278', 'Introduction to Database Management Systems', 
 'Haking Wong RM#322', '12:30-13:30' ,'Thurday', 'Monday', '14:30-15:20', 'MWT2 Meng Wah Complex',
@@ -102,7 +115,7 @@ INSERT INTO Course VALUES ('COMP3278', 'Introduction to Database Management Syst
 
 ;""")
 
-con.execute("""
+my_cursor("""
 
 INSERT INTO Course VALUES ('COMP3330', 'Introduction to Mobile App Development', 
 'Haking Wong RM#242', '10:30-11:30' ,'Friday', 'Monday', '12:30-14:20', 'LE2 Library Extension',
@@ -110,7 +123,7 @@ INSERT INTO Course VALUES ('COMP3330', 'Introduction to Mobile App Development',
 
 ;""")
 
-con.execute("""
+my_cursor("""
 
 INSERT INTO Course VALUES ('COMP3297', 'Software Engineering', 
 'Haking Wong RM#121', '14:30-16:30' ,'Friday', 'Friday', '9:30-11:20', 'CYPP2',
@@ -118,7 +131,7 @@ INSERT INTO Course VALUES ('COMP3297', 'Software Engineering',
 
 ;""")
 
-con.execute("""
+my_cursor("""
 
 INSERT INTO Course VALUES ('IIMT3621', 'Creativity and Business Innovation', 
 'KKLG838', '14:30-16:30' ,'Wednesday', 'Tuesday', '13:30-16:20', 'KKLG603',
@@ -128,7 +141,7 @@ INSERT INTO Course VALUES ('IIMT3621', 'Creativity and Business Innovation',
 
 
 # Multi Value Attribute for Teachers' Message
-con.execute("""
+my_cursor("""
 
     CREATE TABLE Message (
         CourseID varchar(255) NOT NULL ,
@@ -141,14 +154,14 @@ con.execute("""
 );
 ;""")
 
-con.execute("""
+my_cursor("""
 
 INSERT INTO Message VALUES ('COMP3278', 
 'Dear Students. Please join the class every Monday and Thursday')
 
 ;""")
 
-con.execute("""
+my_cursor("""
 
 INSERT INTO Message VALUES ('COMP3330', 
 'Dear Students. Please join the class every Monday and Thursday')
@@ -156,7 +169,7 @@ INSERT INTO Message VALUES ('COMP3330',
 ;""")
 
 # CREATE OTHER TABLES
-con.execute("""
+my_cursor("""
 
     CREATE TABLE CourseContent (
         CourseID varchar(255) NOT NULL,
@@ -167,7 +180,7 @@ con.execute("""
 );
 ;""")
 
-con.execute("""
+my_cursor("""
 
     CREATE TABLE LectureMaterial (
         CourseID varchar(255) NOT NULL ,
@@ -181,7 +194,7 @@ con.execute("""
 );
 ;""")
 
-con.execute("""
+my_cursor("""
 
     CREATE TABLE Assignments (
         CourseID varchar(255) NOT NULL,
@@ -196,7 +209,7 @@ con.execute("""
 );
 ;""")
 
-con.execute("""
+my_cursor("""
 
     CREATE TABLE Department (
         Department_Name varchar(255) NOT NULL ,
