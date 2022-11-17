@@ -35,16 +35,12 @@ def easy_execute():
     df = mysql.execute_sql(EXAMPLE_SQL, to_pandas=True)
     return str(df.to_dict())
 
-
-
 name = ["Divtej", "Bhatia"]
 
 
 @app.route('/')
 def index():
     return name
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
