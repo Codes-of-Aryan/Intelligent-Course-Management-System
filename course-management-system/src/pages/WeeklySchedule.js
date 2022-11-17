@@ -6,7 +6,7 @@ import home from "../assets/home.png";
 
 function Home() {
   return (
-    <Container fluid style={{ background: "#E1FFEE" }}>
+    <Container fluid style={{ background: "#C3EAFB" }}>
       <h1
         style={{
           color: "#6C82C9",
