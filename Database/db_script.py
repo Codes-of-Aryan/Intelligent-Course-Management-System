@@ -8,7 +8,7 @@ con = sqlite3.connect('my-db.db')
 con.execute("""
 
     CREATE TABLE Student (
-        UID int NOT NULL AUTO_INCREMENT,
+        UID int NOT NULL ,
         Last_Name varchar(255) NOT NULL,
         First_Name varchar(255) NOT NULL,
 
@@ -23,8 +23,7 @@ con.execute("""
         Image_Filename varchar(255) NOT NULL,
 
         PRIMARY KEY (`UID`)
-);
-;""")
+); """)
 
 
 con.execute("""
@@ -44,7 +43,7 @@ INSERT INTO Student VALUES (2, 'Goli', 'Smaran', 'golismaran4@gmail.com','123456
 con.execute("""
 
     CREATE TABLE Professor (
-        StaffID int NOT NULL AUTO_INCREMENT,
+        StaffID int NOT NULL ,
 
         Last_Name varchar(255) NOT NULL,
         First_Name varchar(255) NOT NULL,
@@ -73,7 +72,7 @@ INSERT INTO Professor VALUES (3, 'Chan', 'Hubert', 'hubertchan@gmail.com')
 con.execute("""
 
     CREATE TABLE Course (
-        CourseID varchar(255) NOT NULL AUTO_INCREMENT,
+        CourseID varchar(255) NOT NULL ,
         Course_Name varchar(255) NOT NULL,
 
         Consultation_Location varchar(255) NOT NULL,
@@ -132,7 +131,7 @@ INSERT INTO Course VALUES ('IIMT3621', 'Creativity and Business Innovation',
 con.execute("""
 
     CREATE TABLE Message (
-        CourseID varchar(255) NOT NULL AUTO_INCREMENT,
+        CourseID varchar(255) NOT NULL ,
         Teachers_Message varchar(255) NOT NULL,
         PRIMARY KEY (CourseID, Teachers_Message),
         FOREIGN KEY(CourseID)
@@ -160,7 +159,7 @@ INSERT INTO Message VALUES ('COMP3330',
 con.execute("""
 
     CREATE TABLE CourseContent (
-        CourseID varchar(255) NOT NULL AUTO_INCREMENT,
+        CourseID varchar(255) NOT NULL,
         Zoom_Link varchar(255) NOT NULL,
 
         PRIMARY KEY (CourseID)
@@ -171,7 +170,7 @@ con.execute("""
 con.execute("""
 
     CREATE TABLE LectureMaterial (
-        CourseID varchar(255) NOT NULL AUTO_INCREMENT,
+        CourseID varchar(255) NOT NULL ,
         Lecture_Slide varchar(255) NOT NULL,
         Tutorial_ varchar(255) NOT NULL,
 
@@ -185,7 +184,7 @@ con.execute("""
 con.execute("""
 
     CREATE TABLE Assignments (
-        CourseID varchar(255) NOT NULL AUTO_INCREMENT,
+        CourseID varchar(255) NOT NULL,
         Assignment_Post_Date varchar(255) NOT NULL,
         Assignment_Due_Date varchar(255) NOT NULL,
         Assignment_File varchar(255) NOT NULL,
@@ -200,7 +199,7 @@ con.execute("""
 con.execute("""
 
     CREATE TABLE Department (
-        Department_Name varchar(255) NOT NULL AUTO_INCREMENT,
+        Department_Name varchar(255) NOT NULL ,
         DepartmentID varchar(255) NOT NULL,
 
         PRIMARY KEY (Department_Name)
