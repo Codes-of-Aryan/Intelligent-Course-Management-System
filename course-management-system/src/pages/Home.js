@@ -11,7 +11,7 @@ import zoom from "../assets/zoom.png";
 import { Link } from "react-router-dom";
 
 function Home() {
-  const [name, setName] = useState([]);
+  const [name, setName] = useState("");
 
   useEffect(() => {
     fetch("/test")
@@ -46,7 +46,7 @@ function Home() {
         <Col className="col-7">
           <h1 style={{ marginTop: "7%" }}>
             <span style={{ color: "#7978FF" }}>Welcome </span>
-            {", " + name[0] + " " + name[1] + "!"}
+            { name + "!"}
           </h1>
           <p
             style={{ color: "#748DA6", fontWeight: "bold", paddingLeft: "5px" }}
