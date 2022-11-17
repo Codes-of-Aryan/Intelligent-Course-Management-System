@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function LoginActivity() {
   return (
-    <Container fluid style={{ background: "#E1FFEE" }}>
+    <Container fluid style={{ background: "#C3EAFB" }}>
       <Row style={{ height: "100vh", textAlign: "center" }}>
         <Col>
           <h1 style={{ color: "#FF99D7", marginTop: "4%" }}>Login Activity</h1>

@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 function MyCourses() {
   return (
-    <Container fluid style={{ background: "#E1FFEE", height:'100vh' }}>
+    <Container fluid style={{ background: "#C3EAFB", height:'100vh' }}>
     <h1 style={{ color: "#FF99D7", paddingTop: "4%", textAlign: 'center', marginBottom: '4%' }}>My Courses</h1>
       <Row style={{  }}>
         <Col style={{paddingBottom:'4%'}}>
