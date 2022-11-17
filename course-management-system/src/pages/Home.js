@@ -43,7 +43,7 @@ function Home() {
         </Col>
         <Col className="col-7">
           <h1 style={{ marginTop: "13%" }}>
-            <span style={{ color: "#7978FF" }}>Welcome</span>, Mohammad Abdur!
+            <span style={{ color: "#7978FF" }}>Welcome </span>{", " + name[0]+ " "+name[1]}
           </h1>
           <p
             style={{ color: "#748DA6", fontWeight: "bold", paddingLeft: "5px" }}
