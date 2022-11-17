@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import profilePhoto from "../assets/user.png";
 import loginActivity from "../assets/loginactivity.png";
@@ -11,6 +11,20 @@ import zoom from "../assets/zoom.png";
 import { Link } from "react-router-dom";
 
 function Home() {
+
+  const [name, setName] = useState([]);
+
+  useEffect( () => {
+    fetch("/welcome").then(
+      res => res.json()
+    ).then(
+      name=>{
+        setName(name)
+        console.log(name)
+      }
+    )
+  }, [])
+
   return (
     <Container fluid style={{ background: "#E1FFEE" }}>
       <Row style={{ height: "30vh" }}>
