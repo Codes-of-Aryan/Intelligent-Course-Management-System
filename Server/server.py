@@ -79,6 +79,7 @@ my_cursor.execute(
 )
 
 # query to get details of the student
+# Student: UID, Last_Name, First_Name, Email, Password, Curriculum_Major, Curroculum_Minor, Year_Of_Study, Image_Filename
 my_cursor.execute(
     "SELECT * FROM Student WHERE UID = 1;"
 )
