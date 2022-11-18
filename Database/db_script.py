@@ -5,7 +5,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "uwwUyFgX",  #change password to your own
+    password = "12345678",  #change password to your own
     auth_plugin='mysql_native_password',
 )
 
@@ -49,7 +49,7 @@ my_cursor.execute(
     """
 
     CREATE TABLE Student (
-        UID int NOT NULL ,
+        UID varchar(255) NOT NULL ,
         Last_Name varchar(255) NOT NULL,
         First_Name varchar(255) NOT NULL,
 
@@ -57,7 +57,8 @@ my_cursor.execute(
         Password varchar(255) NOT NULL,
 
         Curriculum_Major varchar(255) NOT NULL,
-        Curroculum_Minor varchar(255) NOT NULL,
+        Curriculum_Minor varchar(255) NOT NULL,
+        Curriculum varchar(255) NOT NULL,
 
         Year_Of_Study int NOT NULL,
 
@@ -74,19 +75,7 @@ my_cursor.execute(
 
 my_cursor.execute("""
 
-    INSERT INTO Student VALUES (1 , 'Bhatia', 'Divtej Singh', 'divtejbhatia17@gmail.com','12345678' , 'Computer Science', 'Finance', 3, 'divtej.png', 'Department of Computer Science') 
-;""")
-
-my_cursor.execute("""
-
-INSERT INTO Student VALUES (2, 'Goli', 'Smaran', 'golismaran4@gmail.com','12345678' , 'Computer Science', 'None', '3', 'smaran.png', 'Department of Computer Science')
-
-;""")
-
-my_cursor.execute("""
-
-INSERT INTO Student VALUES (3, 'Agrawal', 'Aryan', 'aryanaga2001@gmail.com','12345678' , 'Computer Science', 'None', '3', 'aryan.png', 'Department of Computer Science')
-
+    INSERT INTO Student VALUES ( '3035756579' , 'Rahman', 'Mohammad Abdur', 'abdur8606@gmail.com','12345678' , 'Computer Science', 'Finance', 'Bachelor of Engineering', 3, 'abdur.png', 'Department of Computer Science') 
 ;""")
 
 

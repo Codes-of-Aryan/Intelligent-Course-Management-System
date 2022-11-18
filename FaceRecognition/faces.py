@@ -26,7 +26,8 @@ def recognize():
     # 3 Open the camera and start face recognition
     # Close in 10 seconds, regardless of a match
     
-    name = 'UNKNOWN' 
+    depict_name = 'DETECTING' 
+    name = 'UNKNOWN'
     while True:
         ret, frame = cap.read()
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -43,7 +44,7 @@ def recognize():
                 font = cv2.QT_FONT_NORMAL
                 id = 0
                 id += 1
-                name = labels[id_]
+                depict_name = name = labels[id_]
                 color = (255, 0, 0)
                 stroke = 2
                 cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
@@ -54,7 +55,7 @@ def recognize():
                 color = (255, 0, 0)
                 stroke = 2
                 font = cv2.QT_FONT_NORMAL
-                cv2.putText(frame, "UNKNOWN", (x, y), font, 1, color, stroke, cv2.LINE_AA)
+                cv2.putText(frame, depict_name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), (2))
 
         cv2.imshow('Attendance System', frame)

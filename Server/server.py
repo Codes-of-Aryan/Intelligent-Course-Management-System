@@ -1,7 +1,6 @@
 from flask import Flask, jsonify
 # from flask_mysql_connector import MySQL
 
-
 import mysql.connector
 
 from flask_sqlalchemy import SQLAlchemy
@@ -14,17 +13,20 @@ import sys
 current_dir = os.getcwd()
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir + '/FaceRecognition')
-# from faces import recognize
+from faces import recognize
 
 '''
 Sample way of using the Facial recognition 
 This would simply return the name of the user 
 detected by the recognition back to this file  
-in the file 
+in the file '''
 
 name = recognize() 
 print(name)
-'''
+
+uid = name.split(',')[1]
+print(uid)
+
 
 app = Flask(__name__)
 
@@ -81,16 +83,14 @@ my_cursor.execute(
 # query to get details of the student
 # Student: UID, Last_Name, First_Name, Email, Password, Curriculum_Major, Curroculum_Minor, Year_Of_Study, Image_Filename
 my_cursor.execute(
-    "SELECT * FROM Student WHERE UID = 1;"
+    "SELECT * FROM Student WHERE UID = " + uid + ";"
 )
 values = my_cursor.fetchall()
 print(values)
-first_name = values[0][0]
-last_name = values[0][1]
 @app.route('/student-details')
 def index():
     return jsonify(uid=values[0][0], l_name=values[0][1], f_name=values[0][2], email=values[0][3], password=values[0][4], major=values[0][5], minor=values[0][6], year=values[0][7], image=values[0][8])
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(port=8000)
