@@ -45,37 +45,8 @@ function Home() {
               Login
             </Button>
           </Link>
-          <Link to="/home" style={{ textDecoration: "none" }}>
-            <Button
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                padding: "8px 32px",
-                gap: "8px",
-                position: "relative",
-                background: "#B1AFFF",
-                margin: "auto",
-                top: "40%",
-                width: "250px",
-                fontWeight: "bold",
-              }}
-            >
-              Sign Up
-            </Button>
-          </Link>
         </Col>
       </Row>
-      {/* <Row>
-        <Col>1 of 2</Col>
-        <Col>2 of 2</Col>
-      </Row>
-      <Row>
-        <Col>1 of 3</Col>
-        <Col>2 of 3</Col>
-        <Col>3 of 3</Col>
-      </Row> */}
     </Container>
   );
 }

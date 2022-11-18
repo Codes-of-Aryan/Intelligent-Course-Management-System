@@ -14,7 +14,7 @@ import sys
 current_dir = os.getcwd() 
 parent_dir = os.path.dirname(current_dir) 
 sys.path.append(parent_dir + '/FaceRecognition')
-from faces import recognize
+# from faces import recognize
 
 '''
 Sample way of using the Facial recognition 
@@ -27,16 +27,7 @@ print(name)
 '''
 
 app = Flask(__name__)
-
-
-
-
-
-
-
-
-
-# 
+ 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:mehyr@SIS11@localhost/Alpha'
 # app.config['MYSQL_USER'] = 'root'
 # app.config['MYSQL_DATABASE'] = 'sys'
@@ -76,7 +67,8 @@ app = Flask(__name__)
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    passwd = "ADD PASS"
+    passwd = "12345678",  #change password to your own
+    auth_plugin='mysql_native_password' 
 )
 
 my_cursor = mydb.cursor()
@@ -100,9 +92,5 @@ def index():
     name = ["Smaran", "Goli"]
     return name
         
-
-
-
-
 if __name__ == '__main__':
     app.run(debug=True)
