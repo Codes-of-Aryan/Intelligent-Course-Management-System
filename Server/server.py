@@ -84,8 +84,6 @@ my_cursor.execute(
 )
 values = my_cursor.fetchall()
 print(values)
-first_name = values[0][0]
-last_name = values[0][1]
 @app.route('/student-details')
 def index():
     return jsonify(uid=values[0][0], l_name=values[0][1], f_name=values[0][2], email=values[0][3], password=values[0][4], major=values[0][5], minor=values[0][6], year=values[0][7], image=values[0][8])
