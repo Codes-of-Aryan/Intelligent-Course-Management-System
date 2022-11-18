@@ -261,18 +261,43 @@ my_cursor.execute("""
 
 my_cursor.execute("""
 
-    CREATE TABLE CourseContentAssignments (
-        CourseID varchar(255) NOT NULL,
-        Assignment_Post_Date varchar(255) NOT NULL,
-        Assignment_Due_Date varchar(255) NOT NULL,
-        Assignment_File varchar(255) NOT NULL,
+INSERT INTO CourseContentLectureMaterial VALUES ('COMP3330', 
+'lecture1.pdf', 'tutorial1.pdf')
 
-        PRIMARY KEY (CourseID),
-        FOREIGN KEY(CourseID)
-
-        REFERENCES Course(CourseID)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ;""")
+
+my_cursor.execute("""
+INSERT INTO CourseContentLectureMaterial VALUES ('COMP3234', 
+'lecture1.pdf', 'tutorial1.pdf')
+
+;""")
+
+my_cursor.execute("""
+INSERT INTO CourseContentLectureMaterial VALUES ('COMP3278', 
+'lecture1.pdf', 'tutorial1.pdf')
+
+;""")
+
+
+
+
+# TBD if we are having assignments table
+# Depends if we have time to implement
+
+# my_cursor.execute("""
+
+#     CREATE TABLE CourseContentAssignments (
+#         CourseID varchar(255) NOT NULL,
+#         Assignment_Post_Date varchar(255) NOT NULL,
+#         Assignment_Due_Date varchar(255) NOT NULL,
+#         Assignment_File varchar(255) NOT NULL,
+
+#         PRIMARY KEY (CourseID),
+#         FOREIGN KEY(CourseID)
+
+#         REFERENCES Course(CourseID)
+# ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+# ;""")
 
 my_cursor.execute("""
 
@@ -283,6 +308,7 @@ my_cursor.execute("""
         FOREIGN KEY (UID) REFERENCES Student(UID) ON DELETE CASCADE,
         FOREIGN KEY (CourseID) REFERENCES Course(CourseID) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 ;""")
 
 my_cursor.execute("""

@@ -75,15 +75,14 @@ mydb = mysql.connector.connect(
     passwd="12345678",  # change password to your own
     auth_plugin='mysql_native_password'
 )
-
+# create cursor object
 my_cursor = mydb.cursor()
-
 
 my_cursor.execute(
     "USE Alpha ; "
 )
 
-# query to get details of the student
+# Query to get details of the student -> Profile Page
 # Student: UID, Last_Name, First_Name, Email, Password, Curriculum_Major, Curroculum_Minor, Year_Of_Study, Image_Filename
 my_cursor.execute(
     "SELECT * FROM Student WHERE UID = " + uid + ";"
@@ -94,34 +93,111 @@ print(values)
 def index():
     return jsonify(uid=values[0][0], l_name=values[0][1], f_name=values[0][2], email=values[0][3], password=values[0][4], major=values[0][5], minor=values[0][6], year=values[0][7], image=values[0][8])
 
+
 # Query to get Course details within 1hr Lecture
-SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Start_Time, C.Lecture_End_Time, 
-CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide
-FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM
-WHERE S.UID = T.UID 
-AND C.CourseID = T.CourseID
-AND CM.CourseID = C.courseID 
-AND CC.CourseID = C.courseID
-AND CCLM.CourseID = C.courseID
-AND C.Lecture_Day = DAYNAME(Current_Date()) 
-AND TIMEDIFF(C.Lecture_Start_Time, Current_Time()) < '00:60:00';
 
-#Query to get Course details within 1 hr tutorial
-SELECT C.CourseID, C.course_Name, C.Tutorial_Location, C.Tutorial_Start_Time, C.Tutorial_End_Time, 
-CM.Message, CC.Zoom_Link, CCLM.Tutorial_Slide
-FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentTutorialMaterial CCLM
-WHERE S.UID = T.UID 
-AND C.CourseID = T.CourseID
-AND CM.CourseID = C.courseID 
-AND CC.CourseID = C.courseID
-AND CCLM.CourseID = C.courseID
-AND C.Lecture_Day = DAYNAME(Current_Date()) 
-AND TIMEDIFF(C.Lecture_Start_Time, Current_Time()) < '00:60:00';
+# SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Start_Time, C.Lecture_End_Time, 
+# CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide
+# FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM
+# WHERE S.UID = T.UID 
+# AND C.CourseID = T.CourseID
+# AND CM.CourseID = C.courseID 
+# AND CC.CourseID = C.courseID
+# AND CCLM.CourseID = C.courseID
+# AND C.Lecture_Day = DAYNAME(Current_Date()) 
+# AND TIMEDIFF(C.Lecture_Start_Time, Current_Time()) < '00:60:00';
+
+# Jsonify code (updated) -> 
+# List course(lecture or tutorial) contents from the takes table
+# where uid matches with current signed in user.
+# Query is tested and works
+my_cursor.execute(
+    """""
+    SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Start_Time, C.Lecture_End_Time, 
+    CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide
+    FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM
+    WHERE S.UID = T.UID 
+    AND S.UID = """ + uid + """""
+    AND C.CourseID = T.CourseID
+    AND CM.CourseID = C.courseID 
+    AND CC.CourseID = C.courseID
+    AND CCLM.CourseID = C.courseID
+    AND C.Lecture_Day = DAYNAME(Current_Date()) 
+    AND TIMEDIFF(C.Lecture_Start_Time, Current_Time()) < '00:60:00';
+     
+    """""
+)
+values = my_cursor.fetchall()
+print(values)
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+@app.route('/student-details') # ABDUR CHANGE THE APP.ROUTE HERE
+def index():
+    return jsonify(CourseID=values[0][0], CourseName=values[0][1], Location=values[0][2], 
+    ClassStart=values[0][3], ClassEnd=values[0][4], Message=values[0][5], 
+    ZoomLink=values[0][6], Slides=values[0][7])
+
+
+# Query to get Course details within 1 hr tutorial
+
+# SELECT C.CourseID, C.course_Name, C.Tutorial_Location, C.Tutorial_Start_Time, C.Tutorial_End_Time, 
+# CM.Message, CC.Zoom_Link, CCLM.Tutorial_Slide
+# FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM
+# WHERE S.UID = T.UID 
+# AND C.CourseID = T.CourseID
+# AND CM.CourseID = C.courseID 
+# AND CC.CourseID = C.courseID
+# AND CCLM.CourseID = C.courseID
+# AND C.Lecture_Day = DAYNAME(Current_Date()) 
+# AND TIMEDIFF(C.Tutorial_Start_Time, Current_Time()) < '00:60:00';
+# Jsonify code (updated) -> 
+# List course(lecture or tutorial) contents from the takes table
+# where uid matches with current signed in user.
+# Query is tested and works
+my_cursor.execute(
+
+    """""
+    SELECT C.CourseID, C.course_Name, C.Tutorial_Location, C.Tutorial_Start_Time, C.Tutorial_End_Time, 
+    CM.Message, CC.Zoom_Link, CCLM.Tutorial_Slide
+    FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM
+    WHERE S.UID = T.UID 
+    AND S.UID = """ + uid + """""
+    AND C.CourseID = T.CourseID
+    AND CM.CourseID = C.courseID 
+    AND CC.CourseID = C.courseID
+    AND CCLM.CourseID = C.courseID
+    AND C.Tutorial_Day = DAYNAME(Current_Date()) 
+    AND TIMEDIFF(C.Tutorial_Start_Time, Current_Time()) < '00:60:00';
+     
+    """""
+)
+values = my_cursor.fetchall()
+print(values)
+
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+@app.route('/student-details') # ABDUR CHANGE THE APP.ROUTE HERE
+def index():
+    return jsonify(CourseID=values[0][0], CourseName=values[0][1], Location=values[0][2], 
+    ClassStart=values[0][3], ClassEnd=values[0][4], Message=values[0][5], 
+    ZoomLink=values[0][6], Slides=values[0][7])
 
 
 
 
 
+
+# Smaran, Divtej thinking how to implement login time
 login_duration = datetime.now() - start_time
 
 if __name__ == '__main__':
