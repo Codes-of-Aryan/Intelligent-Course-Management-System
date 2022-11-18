@@ -21,7 +21,10 @@ This would simply return the name of the user
 detected by the recognition back to this file  
 in the file '''
 
-name = recognize() 
+name = recognize()
+start_time = datetime.now()
+
+
 print(name)
 
 uid = name.split(',')[1]
@@ -91,6 +94,35 @@ print(values)
 def index():
     return jsonify(uid=values[0][0], l_name=values[0][1], f_name=values[0][2], email=values[0][3], password=values[0][4], major=values[0][5], minor=values[0][6], year=values[0][7], image=values[0][8])
 
+# Query to get Course details within 1hr Lecture
+SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Start_Time, C.Lecture_End_Time, 
+CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide
+FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM
+WHERE S.UID = T.UID 
+AND C.CourseID = T.CourseID
+AND CM.CourseID = C.courseID 
+AND CC.CourseID = C.courseID
+AND CCLM.CourseID = C.courseID
+AND C.Lecture_Day = DAYNAME(Current_Date()) 
+AND TIMEDIFF(C.Lecture_Start_Time, Current_Time()) < '00:60:00';
+
+#Query to get Course details within 1 hr tutorial
+SELECT C.CourseID, C.course_Name, C.Tutorial_Location, C.Tutorial_Start_Time, C.Tutorial_End_Time, 
+CM.Message, CC.Zoom_Link, CCLM.Tutorial_Slide
+FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentTutorialMaterial CCLM
+WHERE S.UID = T.UID 
+AND C.CourseID = T.CourseID
+AND CM.CourseID = C.courseID 
+AND CC.CourseID = C.courseID
+AND CCLM.CourseID = C.courseID
+AND C.Lecture_Day = DAYNAME(Current_Date()) 
+AND TIMEDIFF(C.Lecture_Start_Time, Current_Time()) < '00:60:00';
+
+
+
+
+
+login_duration = datetime.now() - start_time
 
 if __name__ == '__main__':
     app.run(port=8000)

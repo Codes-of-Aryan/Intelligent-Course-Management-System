@@ -5,7 +5,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "12345678",  #change password to your own
+    password = "uwwUyFgX",  #change password to your own
     auth_plugin='mysql_native_password',
 )
 
@@ -155,7 +155,7 @@ INSERT INTO Course VALUES ('COMP3278', 'Introduction to Database Management Syst
 my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3330', 'Introduction to Mobile App Development', 
-'Haking Wong RM#242', '10:30-11:30' ,'Friday', 'Saturday', '01:25', '14:20', 'LE2 Library Extension',
+'Haking Wong RM#242', '10:30-11:30' ,'Friday', 'Saturday', '02:30', '14:20', 'LE2 Library Extension',
 'Thurday', '12:30', '13:20', 'LE2 Library Extension', 2)
 
 ;""")
@@ -276,8 +276,8 @@ my_cursor.execute("""
 
 my_cursor.execute("""
 
-    CREATE TABLE takes (
-        UID int NOT NULL,
+    CREATE TABLE Takes (
+        UID varchar(255) NOT NULL,
         CourseID varchar(255) NOT NULL,
         PRIMARY KEY (UID, CourseID),
         FOREIGN KEY (UID) REFERENCES Student(UID) ON DELETE CASCADE,
@@ -287,8 +287,23 @@ my_cursor.execute("""
 
 my_cursor.execute("""
 
-INSERT INTO takes VALUES (1, 'COMP3278'),  (1, 'COMP3330'), (2, 'COMP3234'), (2, 'COMP2119'), (3, 'COMP2119'), (3, 'COMP3278')
+INSERT INTO Takes VALUES ('3035756579', 'COMP3330')
+INSERT INTO Takes VALUES ('3035756579', 'COMP2119')
+INSERT INTO Takes VALUES ('3035756579', 'COMP3278')
+INSERT INTO Takes VALUES ('3035756579', 'COMP3234')
 
+;""")
+
+my_cursor.execute("""
+
+    CREATE TABLE LoginHistory(
+        UID varchar(255) NOT NULL,
+        loginDate date NOT NULL,
+        loginTime time NOT NULL,
+        loginDuration time varchar(255) NOT NULL,
+        PRIMARY KEY (loginDate)
+        FOREIGN KEY (UID) REFERENCES Student(UID) ON DELETE CASCADE,
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ;""")
 mydb.commit()
 mydb.close()
