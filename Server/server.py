@@ -1,12 +1,39 @@
 from flask import Flask
 # from flask_mysql_connector import MySQL
 
+
 import mysql.connector
 
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
+#Importing self made module for 
+#Facial Recognition 
+import os 
+import sys 
+current_dir = os.getcwd() 
+parent_dir = os.path.dirname(current_dir) 
+sys.path.append(parent_dir + '/FaceRecognition')
+from faces import recognize
+
+'''
+Sample way of using the Facial recognition 
+This would simply return the name of the user 
+detected by the recognition back to this file  
+in the file 
+
+name = recognize() 
+print(name)
+'''
+
 app = Flask(__name__)
+
+
+
+
+
+
+
 
 
 # 
