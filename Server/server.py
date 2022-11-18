@@ -94,7 +94,23 @@ def index():
     return jsonify(uid=values[0][0], l_name=values[0][1], f_name=values[0][2], email=values[0][3], password=values[0][4], major=values[0][5], minor=values[0][6], year=values[0][7], image=values[0][8])
 
 
+# Query to get Course details within 1hr Lecture
 
+# SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Start_Time, C.Lecture_End_Time, 
+# CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide
+# FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM
+# WHERE S.UID = T.UID 
+# AND C.CourseID = T.CourseID
+# AND CM.CourseID = C.courseID 
+# AND CC.CourseID = C.courseID
+# AND CCLM.CourseID = C.courseID
+# AND C.Lecture_Day = DAYNAME(Current_Date()) 
+# AND TIMEDIFF(C.Lecture_Start_Time, Current_Time()) < '00:60:00';
+
+# Jsonify code (updated) -> 
+# List course(lecture or tutorial) contents from the takes table
+# where uid matches with current signed in user.
+# Query is tested and works
 my_cursor.execute(
     """""
     SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Start_Time, C.Lecture_End_Time, 
