@@ -5,7 +5,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "12345678",  #change password to your own
+    password = "uwwUyFgX",  #change password to your own
     auth_plugin='mysql_native_password',
 )
 
@@ -18,6 +18,31 @@ my_cursor.execute(
 my_cursor.execute(
     "USE Alpha"
 )
+
+my_cursor.execute("""
+
+    CREATE TABLE Department (
+        DepartmentName varchar(255) NOT NULL ,
+        DepartmentID varchar(255) NOT NULL,
+
+        PRIMARY KEY (DepartmentName)
+
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+;""")
+
+my_cursor.execute("""
+
+INSERT INTO Department VALUES ('Department of Computer Science', 
+'CS')
+
+;""")
+
+my_cursor.execute("""
+
+INSERT INTO Department VALUES ('Department of Civil Engineering', 
+'CIV')
+
+;""")
 
 #Create Student Table
 my_cursor.execute(
@@ -38,27 +63,29 @@ my_cursor.execute(
 
         Image_Filename varchar(255) NOT NULL,
 
-        PRIMARY KEY (UID)
-    ); 
+        DepartmentName varchar(255) NOT NULL,
 
-""")
+        PRIMARY KEY (UID),
+
+        FOREIGN KEY(DepartmentName) REFERENCES Department (DepartmentName) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1; 
+;""")
 
 
 my_cursor.execute("""
 
-    INSERT INTO Student VALUES ( 1 , 'Bhatia', 'Divtej Singh', 'divtejbhatia17@gmail.com','12345678' , 'Computer Science', 'Finance', 3, 'divtej.png') 
+    INSERT INTO Student VALUES ( 1 , 'Bhatia', 'Divtej Singh', 'divtejbhatia17@gmail.com','12345678' , 'Computer Science', 'Finance', 3, 'divtej.png', 'Department of Computer Science') 
+;""")
+
+my_cursor.execute("""
+
+INSERT INTO Student VALUES (2, 'Goli', 'Smaran', 'golismaran4@gmail.com','12345678' , 'Computer Science', 'None', '3', 'smaran.png', 'Department of Computer Science')
 
 ;""")
 
 my_cursor.execute("""
 
-INSERT INTO Student VALUES (2, 'Goli', 'Smaran', 'golismaran4@gmail.com','12345678' , 'Computer Science', 'None', '3', 'smaran.png')
-
-;""")
-
-my_cursor.execute("""
-
-INSERT INTO Student VALUES (3, 'Agarwal', 'Rahul', 'rahulaga2001@gmail.com','12345678' , 'Computer Science', 'Entrepreneurship', '3', 'rahul.png')
+INSERT INTO Student VALUES (3, 'Agrawal', 'Aryan', 'aryanaga2001@gmail.com','12345678' , 'Computer Science', 'None', '3', 'aryan.png', 'Department of Computer Science')
 
 ;""")
 
@@ -74,23 +101,29 @@ my_cursor.execute("""
 
         Email varchar(255) NOT NULL,
 
-        PRIMARY KEY (`StaffID`)
-);
+        DepartmentName varchar(255) NOT NULL,
+
+        PRIMARY KEY (StaffID),
+        FOREIGN KEY (DepartmentName) REFERENCES Department (DepartmentName) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ;""")
 
 
 my_cursor.execute("""
-    INSERT INTO Professor VALUES ( 1 , 'Ping', 'Luo', 'luoping@gmail.com') 
+INSERT INTO Professor VALUES (1, 'Ping', 'Luo', 'luoping@gmail.com', 'Department of Computer Science')
 ;""")
 
 my_cursor.execute("""
-INSERT INTO Professor VALUES (2, 'Tam', 'Anthony', 'anthony@gmail.com')
+INSERT INTO Professor VALUES (2, 'Chim', 'TW', 'twchim@gmail.com', 'Department of Computer Science')
 ;""")
 
 my_cursor.execute("""
-INSERT INTO Professor VALUES (3, 'Chan', 'Hubert', 'hubertchan@gmail.com')
+INSERT INTO Professor VALUES (3, 'Tam', 'Anthony', 'anthony@gmail.com', 'Department of Computer Science')
 ;""")
 
+my_cursor.execute("""
+INSERT INTO Professor VALUES (4, 'Chan', 'Hubert', 'hubertchan@gmail.com', 'Department of Computer Science')
+;""")
 
 #Create Course Table:
 my_cursor.execute("""
@@ -111,10 +144,11 @@ my_cursor.execute("""
         Tutorial_Time varchar(255) NOT NULL,
         Tutorial_Location varchar(255) NOT NULL,
 
+        StaffID int NOT NULL,
 
-        PRIMARY KEY (`CourseID`)
-
-);
+        PRIMARY KEY (CourseID),
+        FOREIGN KEY(StaffID) REFERENCES Professor(StaffID)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ;""")
 
 # Insert data into course table
@@ -122,7 +156,7 @@ my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3278', 'Introduction to Database Management Systems', 
 'Haking Wong RM#322', '12:30-13:30' ,'Thurday', 'Monday', '14:30-15:20', 'MWT2 Meng Wah Complex',
-'Thurday', '13:30-15:20', 'MWT2 Meng Wah Complex')
+'Thurday', '13:30-15:20', 'MWT2 Meng Wah Complex', 1)
 
 ;""")
 
@@ -130,23 +164,23 @@ my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3330', 'Introduction to Mobile App Development', 
 'Haking Wong RM#242', '10:30-11:30' ,'Friday', 'Monday', '12:30-14:20', 'LE2 Library Extension',
-'Thurday', '12:30-13:20', 'LE2 Library Extension')
+'Thurday', '12:30-13:20', 'LE2 Library Extension', 2)
 
 ;""")
 
 my_cursor.execute("""
 
-INSERT INTO Course VALUES ('COMP3297', 'Software Engineering', 
+INSERT INTO Course VALUES ('COMP3234', 'Computer Networks', 
 'Haking Wong RM#121', '14:30-16:30' ,'Friday', 'Friday', '9:30-11:20', 'CYPP2',
-'Tuesday', '9:30-10:20', 'CYPP2')
+'Tuesday', '9:30-10:20', 'CYPP2', 3)
 
 ;""")
 
 my_cursor.execute("""
 
-INSERT INTO Course VALUES ('IIMT3621', 'Creativity and Business Innovation', 
+INSERT INTO Course VALUES ('COMP2119', 'Data Structures and Algorithms', 
 'KKLG838', '14:30-16:30' ,'Wednesday', 'Tuesday', '13:30-16:20', 'KKLG603',
-'Monday', '11:30-12:20', 'KKLG604')
+'Monday', '11:30-12:20', 'KKLG604', 4)
 
 ;""")
 
@@ -154,27 +188,27 @@ INSERT INTO Course VALUES ('IIMT3621', 'Creativity and Business Innovation',
 # Multi Value Attribute for Teachers' Message
 my_cursor.execute("""
 
-    CREATE TABLE Message (
+    CREATE TABLE CourseMessage (
         CourseID varchar(255) NOT NULL ,
-        Teachers_Message varchar(255) NOT NULL,
-        PRIMARY KEY (CourseID, Teachers_Message),
+        Message varchar(255) NOT NULL,
+        PRIMARY KEY (CourseID, Message),
         FOREIGN KEY(CourseID)
 
         REFERENCES Course(CourseID)
 
-);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ;""")
 
 my_cursor.execute("""
 
-INSERT INTO Message VALUES ('COMP3278', 
+INSERT INTO CourseMessage VALUES ('COMP3278', 
 'Dear Students. Please join the class every Monday and Thursday')
 
 ;""")
 
 my_cursor.execute("""
 
-INSERT INTO Message VALUES ('COMP3330', 
+INSERT INTO CourseMessage VALUES ('COMP3330', 
 'Dear Students. Please join the class every Monday and Thursday')
 
 ;""")
@@ -188,26 +222,40 @@ my_cursor.execute("""
 
         PRIMARY KEY (CourseID)
 
-);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ;""")
 
 my_cursor.execute("""
 
-    CREATE TABLE LectureMaterial (
+INSERT INTO CourseContent VALUES ('COMP3278', 
+'hku.comp3278.zoom.us')
+
+;""")
+
+my_cursor.execute("""
+
+INSERT INTO CourseContent VALUES ('COMP3330', 
+'hku.comp3330.zoom.us')
+
+;""")
+
+my_cursor.execute("""
+
+    CREATE TABLE CourseContentLectureMaterial (
         CourseID varchar(255) NOT NULL ,
         Lecture_Slide varchar(255) NOT NULL,
-        Tutorial_ varchar(255) NOT NULL,
+        Tutorial_Slide varchar(255) NOT NULL,
 
         PRIMARY KEY (CourseID),
         FOREIGN KEY(CourseID)
 
         REFERENCES Course(CourseID)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ;""")
 
 my_cursor.execute("""
 
-    CREATE TABLE Assignments (
+    CREATE TABLE CourseContentAssignments (
         CourseID varchar(255) NOT NULL,
         Assignment_Post_Date varchar(255) NOT NULL,
         Assignment_Due_Date varchar(255) NOT NULL,
@@ -217,21 +265,8 @@ my_cursor.execute("""
         FOREIGN KEY(CourseID)
 
         REFERENCES Course(CourseID)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ;""")
-
-my_cursor.execute("""
-
-    CREATE TABLE Department (
-        Department_Name varchar(255) NOT NULL ,
-        DepartmentID varchar(255) NOT NULL,
-
-        PRIMARY KEY (Department_Name)
-
-);
-;""")
-
-
 
 
 mydb.commit()
