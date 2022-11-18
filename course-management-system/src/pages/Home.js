@@ -14,7 +14,7 @@ function Home() {
   const [name, setName] = useState([]);
 
   useEffect(() => {
-    fetch("/test")
+    fetch("/student-details")
       .then((res) => res.json())
       .then((name) => {
         setName(name);
@@ -46,7 +46,7 @@ function Home() {
         <Col className="col-7">
           <h1 style={{ marginTop: "7%" }}>
             <span style={{ color: "#7978FF" }}>Welcome </span>
-            { ", " + name[0]+ " " + name[1] + "!"}
+            { ", " + name.f_name+ " " + name.l_name + "!"}
           </h1>
           <p
             style={{ color: "#748DA6", fontWeight: "bold", paddingLeft: "5px" }}
