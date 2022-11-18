@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import profilePhoto from "../assets/user.png";
 import loginActivity from "../assets/loginactivity.png";
@@ -13,6 +13,17 @@ import coursedetails from "../assets/coursedetails.png";
 import { Link } from "react-router-dom";
 
 function MyProfile() {
+  const [student, setStudent] = useState([]);
+
+  useEffect(() => {
+    fetch("/student-details")
+      .then((res) => res.json())
+      .then((student) => {
+        setStudent(student);
+        console.log(student);
+      });
+  }, []);
+
   return (
     <Container fluid style={{ background: "#C3EAFB", height: "100vh" }}>
       <h1
@@ -37,7 +48,7 @@ function MyProfile() {
             <Card.Body>
               <img src={profilePhoto}></img>
               <h3 style={{ marginTop: "4%" }}>
-                <b>Mohammad Abdur Rahman</b>
+                <b>{student.f_name + " " + student.l_name}</b>
               </h3>
               <h5>The University of Hong Kong</h5>
               <h5>Bachelor of Engineering</h5>
@@ -58,7 +69,7 @@ function MyProfile() {
                   </h5>
                 </Col>
                 <Col className="col-8">
-                  <h5>Mohammad Abdur Rahman</h5>
+                  <h5>{student.f_name + " " + student.l_name}</h5>
                 </Col>
               </Row>
               <Row style={{ marginBottom: "5px" }}>
@@ -68,7 +79,7 @@ function MyProfile() {
                   </h5>
                 </Col>
                 <Col className="col-8">
-                  <h5>3035756579</h5>
+                  <h5>{student.uid}</h5>
                 </Col>
               </Row>
               <Row style={{ marginBottom: "5px" }}>
@@ -78,7 +89,7 @@ function MyProfile() {
                   </h5>
                 </Col>
                 <Col className="col-8">
-                  <h5>id110067@connect.hku.hk</h5>
+                  <h5>{student.email}</h5>
                 </Col>
               </Row>
               <Row style={{ marginBottom: "5px" }}>
@@ -88,7 +99,7 @@ function MyProfile() {
                   </h5>
                 </Col>
                 <Col className="col-8">
-                  <h5>3</h5>
+                  <h5>{student.year}</h5>
                 </Col>
               </Row>
               <Row style={{ marginBottom: "5px" }}>
@@ -108,7 +119,7 @@ function MyProfile() {
                   </h5>
                 </Col>
                 <Col className="col-8">
-                  <h5>Computer Science</h5>
+                  <h5>{student.major}</h5>
                 </Col>
               </Row>
               <Row>
@@ -118,7 +129,7 @@ function MyProfile() {
                   </h5>
                 </Col>
                 <Col className="col-8">
-                  <h5>Finance</h5>
+                  <h5>{student.minor}</h5>
                 </Col>
               </Row>
             </Card.Body>
