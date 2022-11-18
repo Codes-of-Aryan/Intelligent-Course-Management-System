@@ -74,7 +74,7 @@ my_cursor.execute(
 
 my_cursor.execute("""
 
-    INSERT INTO Student VALUES ( 1 , 'Bhatia', 'Divtej Singh', 'divtejbhatia17@gmail.com','12345678' , 'Computer Science', 'Finance', 3, 'divtej.png', 'Department of Computer Science') 
+    INSERT INTO Student VALUES (1 , 'Bhatia', 'Divtej Singh', 'divtejbhatia17@gmail.com','12345678' , 'Computer Science', 'Finance', 3, 'divtej.png', 'Department of Computer Science') 
 ;""")
 
 my_cursor.execute("""
@@ -137,11 +137,14 @@ my_cursor.execute("""
         Consultation_Day varchar(255) NOT NULL,
 
         Lecture_Day varchar(255) NOT NULL,
-        Lecture_Time varchar(255) NOT NULL,
+        Lecture_Start_Time time NOT NULL,
+        Lecture_End_Time time NOT NULL,
         Lecture_Location varchar(255) NOT NULL,
 
         Tutorial_Day varchar(255) NOT NULL,
-        Tutorial_Time varchar(255) NOT NULL,
+        Tutorial_Start_Time time NOT NULL,
+        Tutorial_End_Time time NOT NULL,
+
         Tutorial_Location varchar(255) NOT NULL,
 
         StaffID int NOT NULL,
@@ -155,32 +158,32 @@ my_cursor.execute("""
 my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3278', 'Introduction to Database Management Systems', 
-'Haking Wong RM#322', '12:30-13:30' ,'Thurday', 'Monday', '14:30-15:20', 'MWT2 Meng Wah Complex',
-'Thurday', '13:30-15:20', 'MWT2 Meng Wah Complex', 1)
+'Haking Wong RM#322', '12:30-13:30' ,'Thurday', 'Monday', '14:30', '15:20', 'MWT2 Meng Wah Complex',
+'Thurday', '13:30', '15:20', 'MWT2 Meng Wah Complex', 1)
 
 ;""")
 
 my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3330', 'Introduction to Mobile App Development', 
-'Haking Wong RM#242', '10:30-11:30' ,'Friday', 'Monday', '12:30-14:20', 'LE2 Library Extension',
-'Thurday', '12:30-13:20', 'LE2 Library Extension', 2)
+'Haking Wong RM#242', '10:30-11:30' ,'Friday', 'Saturday', '01:25', '14:20', 'LE2 Library Extension',
+'Thurday', '12:30', '13:20', 'LE2 Library Extension', 2)
 
 ;""")
 
 my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3234', 'Computer Networks', 
-'Haking Wong RM#121', '14:30-16:30' ,'Friday', 'Friday', '9:30-11:20', 'CYPP2',
-'Tuesday', '9:30-10:20', 'CYPP2', 3)
+'Haking Wong RM#121', '14:30-16:30' ,'Friday', 'Saturday', '01:20', '11:20', 'CYPP2',
+'Tuesday', '9:30', '10:20', 'CYPP2', 3)
 
 ;""")
 
 my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP2119', 'Data Structures and Algorithms', 
-'KKLG838', '14:30-16:30' ,'Wednesday', 'Tuesday', '13:30-16:20', 'KKLG603',
-'Monday', '11:30-12:20', 'KKLG604', 4)
+'KKLG838', '14:30-16:30' ,'Wednesday', 'Tuesday', '13:30', '16:20', 'KKLG603',
+'Monday', '11:30', '12:20', 'KKLG604', 4)
 
 ;""")
 
@@ -202,6 +205,13 @@ my_cursor.execute("""
 my_cursor.execute("""
 
 INSERT INTO CourseMessage VALUES ('COMP3278', 
+'Dear Students. Please join the class every Monday and Thursday')
+
+;""")
+
+my_cursor.execute("""
+
+INSERT INTO CourseMessage VALUES ('COMP3234', 
 'Dear Students. Please join the class every Monday and Thursday')
 
 ;""")
@@ -241,6 +251,13 @@ INSERT INTO CourseContent VALUES ('COMP3330',
 
 my_cursor.execute("""
 
+INSERT INTO CourseContent VALUES ('COMP3234', 
+'hku.comp3234.zoom.us')
+
+;""")
+
+my_cursor.execute("""
+
     CREATE TABLE CourseContentLectureMaterial (
         CourseID varchar(255) NOT NULL ,
         Lecture_Slide varchar(255) NOT NULL,
@@ -268,6 +285,21 @@ my_cursor.execute("""
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ;""")
 
+my_cursor.execute("""
 
+    CREATE TABLE takes (
+        UID int NOT NULL,
+        CourseID varchar(255) NOT NULL,
+        PRIMARY KEY (UID, CourseID),
+        FOREIGN KEY (UID) REFERENCES Student(UID) ON DELETE CASCADE,
+        FOREIGN KEY (CourseID) REFERENCES Course(CourseID) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+;""")
+
+my_cursor.execute("""
+
+INSERT INTO takes VALUES (1, 'COMP3278'),  (1, 'COMP3330'), (2, 'COMP3234'), (2, 'COMP2119'), (3, 'COMP2119'), (3, 'COMP3278')
+
+;""")
 mydb.commit()
 mydb.close()
