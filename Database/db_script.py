@@ -5,17 +5,22 @@ import mysql.connector
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    passwd = "12345678"
+    password = "12345678",  #change password to your own
+    auth_plugin='mysql_native_password',
 )
 
 my_cursor = mydb.cursor()
 
-my_cursor(
+my_cursor.execute(
     "CREATE DATABASE Alpha"
     )
 
+my_cursor.execute(
+    "USE Alpha"
+)
+
 #Create Student Table
-my_cursor(
+my_cursor.execute(
     """
 
     CREATE TABLE Student (
@@ -39,19 +44,19 @@ my_cursor(
 """)
 
 
-my_cursor("""
+my_cursor.execute("""
 
     INSERT INTO Student VALUES ( 1 , 'Bhatia', 'Divtej Singh', 'divtejbhatia17@gmail.com','12345678' , 'Computer Science', 'Finance', 3, 'divtej.png') 
 
 ;""")
 
-my_cursor("""
+my_cursor.execute("""
 
 INSERT INTO Student VALUES (2, 'Goli', 'Smaran', 'golismaran4@gmail.com','12345678' , 'Computer Science', 'None', '3', 'smaran.png')
 
 ;""")
 
-my_cursor("""
+my_cursor.execute("""
 
 INSERT INTO Student VALUES (3, 'Agarwal', 'Rahul', 'rahulaga2001@gmail.com','12345678' , 'Computer Science', 'Entrepreneurship', '3', 'rahul.png')
 
@@ -59,7 +64,7 @@ INSERT INTO Student VALUES (3, 'Agarwal', 'Rahul', 'rahulaga2001@gmail.com','123
 
 
 #Create Professor Table:
-my_cursor("""
+my_cursor.execute("""
 
     CREATE TABLE Professor (
         StaffID int NOT NULL ,
@@ -74,21 +79,21 @@ my_cursor("""
 ;""")
 
 
-my_cursor("""
+my_cursor.execute("""
     INSERT INTO Professor VALUES ( 1 , 'Ping', 'Luo', 'luoping@gmail.com') 
 ;""")
 
-my_cursor("""
+my_cursor.execute("""
 INSERT INTO Professor VALUES (2, 'Tam', 'Anthony', 'anthony@gmail.com')
 ;""")
 
-my_cursor("""
+my_cursor.execute("""
 INSERT INTO Professor VALUES (3, 'Chan', 'Hubert', 'hubertchan@gmail.com')
 ;""")
 
 
 #Create Course Table:
-my_cursor("""
+my_cursor.execute("""
 
     CREATE TABLE Course (
         CourseID varchar(255) NOT NULL ,
@@ -113,7 +118,7 @@ my_cursor("""
 ;""")
 
 # Insert data into course table
-my_cursor("""
+my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3278', 'Introduction to Database Management Systems', 
 'Haking Wong RM#322', '12:30-13:30' ,'Thurday', 'Monday', '14:30-15:20', 'MWT2 Meng Wah Complex',
@@ -121,7 +126,7 @@ INSERT INTO Course VALUES ('COMP3278', 'Introduction to Database Management Syst
 
 ;""")
 
-my_cursor("""
+my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3330', 'Introduction to Mobile App Development', 
 'Haking Wong RM#242', '10:30-11:30' ,'Friday', 'Monday', '12:30-14:20', 'LE2 Library Extension',
@@ -129,7 +134,7 @@ INSERT INTO Course VALUES ('COMP3330', 'Introduction to Mobile App Development',
 
 ;""")
 
-my_cursor("""
+my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3297', 'Software Engineering', 
 'Haking Wong RM#121', '14:30-16:30' ,'Friday', 'Friday', '9:30-11:20', 'CYPP2',
@@ -137,7 +142,7 @@ INSERT INTO Course VALUES ('COMP3297', 'Software Engineering',
 
 ;""")
 
-my_cursor("""
+my_cursor.execute("""
 
 INSERT INTO Course VALUES ('IIMT3621', 'Creativity and Business Innovation', 
 'KKLG838', '14:30-16:30' ,'Wednesday', 'Tuesday', '13:30-16:20', 'KKLG603',
@@ -147,7 +152,7 @@ INSERT INTO Course VALUES ('IIMT3621', 'Creativity and Business Innovation',
 
 
 # Multi Value Attribute for Teachers' Message
-my_cursor("""
+my_cursor.execute("""
 
     CREATE TABLE Message (
         CourseID varchar(255) NOT NULL ,
@@ -160,14 +165,14 @@ my_cursor("""
 );
 ;""")
 
-my_cursor("""
+my_cursor.execute("""
 
 INSERT INTO Message VALUES ('COMP3278', 
 'Dear Students. Please join the class every Monday and Thursday')
 
 ;""")
 
-my_cursor("""
+my_cursor.execute("""
 
 INSERT INTO Message VALUES ('COMP3330', 
 'Dear Students. Please join the class every Monday and Thursday')
@@ -175,7 +180,7 @@ INSERT INTO Message VALUES ('COMP3330',
 ;""")
 
 # CREATE OTHER TABLES
-my_cursor("""
+my_cursor.execute("""
 
     CREATE TABLE CourseContent (
         CourseID varchar(255) NOT NULL,
@@ -186,7 +191,7 @@ my_cursor("""
 );
 ;""")
 
-my_cursor("""
+my_cursor.execute("""
 
     CREATE TABLE LectureMaterial (
         CourseID varchar(255) NOT NULL ,
@@ -200,7 +205,7 @@ my_cursor("""
 );
 ;""")
 
-my_cursor("""
+my_cursor.execute("""
 
     CREATE TABLE Assignments (
         CourseID varchar(255) NOT NULL,
@@ -215,7 +220,7 @@ my_cursor("""
 );
 ;""")
 
-my_cursor("""
+my_cursor.execute("""
 
     CREATE TABLE Department (
         Department_Name varchar(255) NOT NULL ,
@@ -229,5 +234,5 @@ my_cursor("""
 
 
 
-con.commit()
-con.close()
+mydb.commit()
+mydb.close()
