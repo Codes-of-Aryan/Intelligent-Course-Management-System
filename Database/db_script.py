@@ -176,7 +176,6 @@ INSERT INTO Course VALUES ('COMP2119', 'Data Structures and Algorithms',
 
 ;""")
 
-
 # Multi Value Attribute for Teachers' Message
 my_cursor.execute("""
 
@@ -212,6 +211,13 @@ INSERT INTO CourseMessage VALUES ('COMP3330',
 
 ;""")
 
+my_cursor.execute("""
+
+INSERT INTO CourseMessage VALUES ('COMP2119', 
+'Dear Students. Please join the class every Monday and Thursday')
+
+;""")
+
 # CREATE OTHER TABLES
 my_cursor.execute("""
 
@@ -242,6 +248,13 @@ my_cursor.execute("""
 
 INSERT INTO CourseContent VALUES ('COMP3234', 
 'hku.comp3234.zoom.us')
+
+;""")
+
+my_cursor.execute("""
+
+INSERT INTO CourseContent VALUES ('COMP2119', 
+'hku.comp2119.zoom.us')
 
 ;""")
 
@@ -287,23 +300,21 @@ my_cursor.execute("""
 
 my_cursor.execute("""
 
-INSERT INTO Takes VALUES ('3035756579', 'COMP3330')
-INSERT INTO Takes VALUES ('3035756579', 'COMP2119')
-INSERT INTO Takes VALUES ('3035756579', 'COMP3278')
-INSERT INTO Takes VALUES ('3035756579', 'COMP3234')
+INSERT INTO Takes VALUES ('3035756579', 'COMP3330'),('3035756579', 'COMP2119'),('3035756579', 'COMP3278'),('3035756579', 'COMP3234')
 
 ;""")
 
-my_cursor.execute("""
+#my_cursor.execute("""
 
-    CREATE TABLE LoginHistory(
-        UID varchar(255) NOT NULL,
-        loginDate date NOT NULL,
-        loginTime time NOT NULL,
-        loginDuration time varchar(255) NOT NULL,
-        PRIMARY KEY (loginDate)
-        FOREIGN KEY (UID) REFERENCES Student(UID) ON DELETE CASCADE,
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-;""")
+   # CREATE TABLE LoginHistory(
+        #UID varchar(255) NOT NULL,
+        #loginDate date NOT NULL,
+        #loginTime time NOT NULL,
+        #loginDuration time varchar(255) NOT NULL,
+        #PRIMARY KEY (loginDate),
+        #FOREIGN KEY (UID) REFERENCES Student(UID) ON DELETE CASCADE
+#) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+#;""")
+
 mydb.commit()
 mydb.close()
