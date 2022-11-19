@@ -181,9 +181,11 @@ values5 = my_cursor.fetchall()
 print(values5)
 @app.route('/one-hour-tutorial')
 def ohc():
-    return jsonify(CourseID=values3[0][0], CourseName=values3[0][1], Location=values3[0][2], 
-    ClassStart=str(values3[0][3]), ClassEnd=str(values3[0][4]), Message=values3[0][5], 
-    ZoomLink=values3[0][6], Slides=values3[0][7])
+    return jsonify(CourseID=values5[0][0], CourseName=values5[0][1], ConsultationLocation=values5[0][2], 
+    ConsultationTime=str(values5[0][3]), ConsultationDay=(values5[0][4]), LectureLocation=values5[0][5], 
+    LectureDay=values5[0][6], LectureStartTime=str(values5[0][7]), LectureEndTime=str(values5[0][8]), TutorialLocation=values5[0][9], 
+    TutoriaDay=values5[0][10], TutorialStartTime=str(values5[0][11]), TutorialEndTime=str(values5[0][12]), Message=values5[0][13], 
+    ZoomLink=values5[0][14], LectureSlides=values5[0][15], TutorialSlides=values5[0][16])
 
 
 
