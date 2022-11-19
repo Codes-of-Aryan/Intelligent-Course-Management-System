@@ -84,7 +84,7 @@ my_cursor.execute(
     "USE Alpha ; "
 )
 
-# Query to get details of the student -> Profile Page
+# Query1 to get details of the student -> Profile Page
 # Student: UID, Last_Name, First_Name, Email, Password, Curriculum_Major, Curroculum_Minor, Year_Of_Study, Image_Filename
 my_cursor.execute(
     "SELECT * FROM Student WHERE UID = " + uid + ";"
@@ -96,7 +96,7 @@ def studentDetails():
     return jsonify(uid=values1[0][0], l_name=values1[0][1], f_name=values1[0][2], email=values1[0][3], password=values1[0][4], major=values1[0][5], minor=values1[0][6], curriculum=values1[0][7], year=values1[0][8], image=values1[0][9], department=values1[0][10])
 
 
-# Query to get Course details within 1hr Lecture
+# Query2 to get Course details within 1hr Lecture
 
 # SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Start_Time, C.Lecture_End_Time, 
 # CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide
@@ -108,8 +108,20 @@ def studentDetails():
 # AND CCLM.CourseID = C.courseID 
 # AND C.Lecture_Day = DAYNAME(Current_Date()) 
 # AND (SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Lecture_Start_Time, CURRENT_TIME)))) = 0;
+my_cursor.execute(
+    "SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Start_Time, C.Lecture_End_Time, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM WHERE S.UID = " + uid + "AND S.UID = T.UID  AND C.CourseID = T.CourseID AND CM.CourseID = C.courseID AND CC.CourseID = C.courseID AND CCLM.CourseID = C.courseID AND C.Lecture_Day = DAYNAME(Current_Date()) AND (SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Lecture_Start_Time, CURRENT_TIME)))) = 0; "
+)
+values2 = my_cursor.fetchall()
+print(values2)
+@app.route('/one-hour-course')
+def ohc():
+    return jsonify(CourseID=values2[0][0], CourseName=values2[0][1], Location=values2[0][2], 
+    ClassStart=str(values2[0][3]), ClassEnd=str(values2[0][4]), Message=values2[0][5], 
+    ZoomLink=values2[0][6], Slides=values2[0][7])
 
-# Query to get course details within 1hr tutorial 
+
+
+# Query3 to get course details within 1hr tutorial 
 
 # SELECT C.CourseID, C.course_Name, C.Tutorial_Location, C.Tutorial_Start_Time, C.Tutorial_End_Time, 
 # CM.Message, CC.Zoom_Link, CCLM.Tutorial_Slide
@@ -121,28 +133,75 @@ def studentDetails():
 # AND CCLM.CourseID = C.courseID
 # AND C.Tutorial_Day = DAYNAME(Current_Date()) 
 # AND (SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Tutorial_Start_Time, CURRENT_TIME)))) = 0;
-
-# Jsonify code (updated) -> 
-# List course(lecture or tutorial) contents from the takes table
-# where uid matches with current signed in user.
-# Query is tested and works
 my_cursor.execute(
-    "SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Start_Time, C.Lecture_End_Time, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide FROM (Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM) WHERE (S.UID = T.UID) AND (S.UID = " + uid + ") AND (C.CourseID = T.CourseID) AND (CM.CourseID = C.courseID) AND (CC.CourseID = C.courseID) AND (CCLM.CourseID = C.courseID) AND (C.Lecture_Day = DAYNAME(Current_Date())) AND (TIMEDIFF(C.Lecture_Start_Time, Current_Time()) < '00:60:00');"
+    "SELECT C.CourseID, C.course_Name, C.Tutorial_Location, C.Tutorial_Start_Time, C.Tutorial_End_Time, CM.Message, CC.Zoom_Link, CCLM.Tutorial_Slide FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM WHERE S.UID = " + uid + "AND S.UID = T.UID  AND C.CourseID = T.CourseID AND CM.CourseID = C.courseID AND CC.CourseID = C.courseID AND CCLM.CourseID = C.courseID AND C.Tutorial_Day = DAYNAME(Current_Date()) AND (SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Tutorial_Start_Time, CURRENT_TIME)))) = 0; "
 )
-values2 = my_cursor.fetchall()
-print(values2)
-# ABDUR CHANGE THE APP.ROUTE HERE
-# ABDUR CHANGE THE APP.ROUTE HERE
-# ABDUR CHANGE THE APP.ROUTE HERE
-# ABDUR CHANGE THE APP.ROUTE HERE
-# ABDUR CHANGE THE APP.ROUTE HERE
-# ABDUR CHANGE THE APP.ROUTE HERE
-# ABDUR CHANGE THE APP.ROUTE HERE
-@app.route('/one-hour-course') # ABDUR CHANGE THE APP.ROUTE HERE
+values3 = my_cursor.fetchall()
+print(values3)
+@app.route('/one-hour-tutorial')
 def ohc():
-    return jsonify(CourseID=values2[0][0], CourseName=values2[0][1], Location=values2[0][2], 
-    ClassStart=str(values2[0][3]), ClassEnd=str(values2[0][4]), Message=values2[0][5], 
-    ZoomLink=values2[0][6], Slides=values2[0][7])
+    return jsonify(CourseID=values3[0][0], CourseName=values3[0][1], Location=values3[0][2], 
+    ClassStart=str(values3[0][3]), ClassEnd=str(values3[0][4]), Message=values3[0][5], 
+    ZoomLink=values3[0][6], Slides=values3[0][7])
+
+
+# Query4 to get course name and course code for profile page of user
+my_cursor.execute(
+    "SELECT T.CourseID, C.course_Name FROM Student S, Takes T, Course C WHERE S.UID = T.UID  AND C.CourseID = T.CourseID AND S.UID = " + uid + ";"
+)
+values4 = my_cursor.fetchall()
+print(values4)
+@app.route('/one-hour-tutorial')
+def ohc():
+    return jsonify(CourseID=values4[0][0], CourseName=values4[0][1])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# DO NOT READ BELOW THIS
+
+# # Jsonify code (updated) -> 
+# # List course(lecture or tutorial) contents from the takes table
+# # where uid matches with current signed in user.
+# # Query is tested and works
+# my_cursor.execute(
+#     "SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Start_Time, C.Lecture_End_Time, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide FROM (Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM) WHERE (S.UID = T.UID) AND (S.UID = " + uid + ") AND (C.CourseID = T.CourseID) AND (CM.CourseID = C.courseID) AND (CC.CourseID = C.courseID) AND (CCLM.CourseID = C.courseID) AND (C.Lecture_Day = DAYNAME(Current_Date())) AND (TIMEDIFF(C.Lecture_Start_Time, Current_Time()) < '00:60:00');"
+# )
+# values2 = my_cursor.fetchall()
+# print(values2)
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# @app.route('/one-hour-course') # ABDUR CHANGE THE APP.ROUTE HERE
+# def ohc():
+#     return jsonify(CourseID=values2[0][0], CourseName=values2[0][1], Location=values2[0][2], 
+#     ClassStart=str(values2[0][3]), ClassEnd=str(values2[0][4]), Message=values2[0][5], 
+#     ZoomLink=values2[0][6], Slides=values2[0][7])
 
 
 # Query to get Course details within 1 hr tutorial
