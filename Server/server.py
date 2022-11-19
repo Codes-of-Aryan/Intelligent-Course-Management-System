@@ -28,10 +28,10 @@ start_time = datetime.now()
 
 
 
-print(name)
+# print(name)
 
 uid = name.split(',')[1]
-print(uid)
+# print(uid)
 
 
 app = Flask(__name__)
@@ -91,7 +91,7 @@ my_cursor.execute(
     "SELECT * FROM Student WHERE UID = " + uid + ";"
 )
 values1 = my_cursor.fetchall()
-print(values1)
+# print(values1)
 @app.route('/student-details')
 def studentDetails():
     return jsonify(uid=values1[0][0], l_name=values1[0][1], f_name=values1[0][2], email=values1[0][3], password=values1[0][4], major=values1[0][5], minor=values1[0][6], curriculum=values1[0][7], year=values1[0][8], image=values1[0][9], department=values1[0][10])
@@ -113,7 +113,7 @@ my_cursor.execute(
     "SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Start_Time, C.Lecture_End_Time, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide FROM (Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM) WHERE (S.UID = " + uid + ") AND (S.UID = T.UID)  AND (C.CourseID = T.CourseID) AND (CM.CourseID = C.courseID) AND (CC.CourseID = C.courseID) AND (CCLM.CourseID = C.courseID) AND (C.Lecture_Day = DAYNAME(Current_Date())) AND ((SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Lecture_Start_Time, CURRENT_TIME)))) = 0); "
 )
 values2 = my_cursor.fetchall()
-print(values2)
+# print(values2)
 @app.route('/one-hour-course')
 def ohc():
     if (len(values2) != 0):
@@ -146,7 +146,7 @@ my_cursor.execute(
     "SELECT C.CourseID, C.course_Name, C.Tutorial_Location, C.Tutorial_Start_Time, C.Tutorial_End_Time, CM.Message, CC.Zoom_Link, CCLM.Tutorial_Slide FROM (Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM) WHERE (S.UID = " + uid + ") AND (S.UID = T.UID) AND (C.CourseID = T.CourseID) AND (CM.CourseID = C.courseID) AND (CC.CourseID = C.courseID) AND (CCLM.CourseID = C.courseID) AND (C.Tutorial_Day = DAYNAME(Current_Date())) AND ((SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Tutorial_Start_Time, CURRENT_TIME)))) = 0); "
 )
 values3 = my_cursor.fetchall()
-print(values3)
+# print(values3)
 @app.route('/one-hour-tutorial')
 def oht():
     if (len(values3) != 0):
@@ -159,15 +159,33 @@ def oht():
         ZoomLink="-", Slides="-")
 
 
+# Done till here
+
+
+
+
+
+
+
+
+
 # Query4 to get course name and course code for profile page of user
 my_cursor.execute(
     "SELECT T.CourseID, C.course_Name FROM (Student S, Takes T, Course C) WHERE (S.UID = T.UID)  AND (C.CourseID = T.CourseID) AND (S.UID = " + uid + ");"
 )
-values4 = my_cursor.fetchall()
-print(values4)
+valuesx = my_cursor.fetchall()
+print(valuesx)
 @app.route('/courses')
 def courses():
-    return jsonify(CourseID=values4[0][0], CourseName=values4[0][1])
+    c_name = []
+    c_code = []
+    c_details = []
+    for i in valuesx:
+        c_code.append(i[0])
+        c_name.append(i[1])
+    for i in range(len(c_code)):
+        c_details.append(c_code[i] + " " + c_name[i])
+    return jsonify(courseDetails = c_details)
 
 
 
@@ -192,7 +210,7 @@ my_cursor.execute(
     "SELECT C.CourseID, C.course_Name, C.Consultation_Location, C.Consultation_Time, C.Consultation_Day, C.Lecture_Location, C.Lecture_Day, C.Lecture_Start_Time, C.Lecture_End_Time, C.Tutorial_Location, C.Tutorial_Day, C.Tutorial_Start_Time, C.Tutorial_End_Time, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide, CCLM.Tutorial_Slide FROM (Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM) WHERE (S.UID = " + uid + ") AND (S.UID = T.UID)  AND (C.CourseID = T.CourseID) AND (CM.CourseID = C.courseID) AND (CC.CourseID = C.courseID) AND (CCLM.CourseID = C.courseID);"
 )
 values5 = my_cursor.fetchall()
-print(values5)
+# print(values5)
 @app.route('/course-details')
 def courseDetails():
     return jsonify(CourseID=values5[0][0], CourseName=values5[0][1], ConsultationLocation=values5[0][2], 
