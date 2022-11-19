@@ -198,12 +198,38 @@ def index():
     ClassStart=values[0][3], ClassEnd=values[0][4], Message=values[0][5], 
     ZoomLink=values[0][6], Slides=values[0][7])
 
+#_--------------------------------
 # Query to list all the courses enrolled 
 # SELECT T.CourseID, C.course_Name
 # FROM Student S, Takes T, Course C
 # WHERE S.UID = T.UID 
-# AND C.CourseID = T.CourseID
+# AND C.CourseID = T.
+# CourseID
 # AND S.UID = 3035756579;
+
+my_cursor.execute(
+
+    "SELECT T.CourseID, C.course_Name FROM Student S, Takes T, Course C WHERE S.UID = T.UID AND C.CourseID = T.CourseID AND S.UID =" + uid + ";"
+    
+)
+values = my_cursor.fetchall()
+print(values)
+
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+@app.route('/student-details') # ABDUR CHANGE THE APP.ROUTE HERE
+def index():
+    return jsonify(CourseID=values[0][0], CourseName=values[0][1])
+
+
+
+
+
 
 # # Query to display content of each course 
 # SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Day, C.Lecture_Start_Time, C.Lecture_End_Time, 
@@ -214,6 +240,24 @@ def index():
 # AND C.CourseID = T.CourseID
 # AND CM.CourseID = C.courseID 
 # AND CC.CourseID = C.courseID;
+
+my_cursor.execute(
+
+    "SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Day, C.Lecture_Start_Time, C.Lecture_End_Time, CM.Message, CC.Zoom_Link FROM Student S, Course C, CourseMessage CM, Takes T, CourseContent CC WHERE S.UID = T.UID  AND S.UID = " + uid + " AND C.CourseID = T.CourseID AND CM.CourseID = C.courseID AND CC.CourseID = C.courseID;"   
+)
+values = my_cursor.fetchall()
+print(values)
+
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+# ABDUR CHANGE THE APP.ROUTE HERE
+@app.route('/student-details') # ABDUR CHANGE THE APP.ROUTE HERE
+def index():
+    return jsonify(CourseID=values[0][0], CourseName=values[0][1])
 
 
 # Smaran, Divtej thinking how to implement login time
