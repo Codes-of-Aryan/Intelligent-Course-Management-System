@@ -24,6 +24,12 @@ in the file '''
 name = recognize()
 start_time = datetime.now()
 
+my_cursor.execute("""
+
+INSERT INTO Takes VALUES ('3035756579', 'COMP3330'),('3035756579', 'COMP2119'),('3035756579', 'COMP3278'),('3035756579', 'COMP3234')
+
+;""")
+
 
 print(name)
 
@@ -192,9 +198,22 @@ def index():
     ClassStart=values[0][3], ClassEnd=values[0][4], Message=values[0][5], 
     ZoomLink=values[0][6], Slides=values[0][7])
 
+# Query to list all the courses enrolled 
+# SELECT T.CourseID, C.course_Name
+# FROM Student S, Takes T, Course C
+# WHERE S.UID = T.UID 
+# AND C.CourseID = T.CourseID
+# AND S.UID = 3035756579;
 
-
-
+# # Query to display content of each course 
+# SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Day, C.Lecture_Start_Time, C.Lecture_End_Time, 
+# CM.Message, CC.Zoom_Link
+# FROM Student S, Course C, CourseMessage CM, Takes T, CourseContent CC
+# WHERE S.UID = T.UID 
+# AND S.UID = '3035756579'
+# AND C.CourseID = T.CourseID
+# AND CM.CourseID = C.courseID 
+# AND CC.CourseID = C.courseID;
 
 
 # Smaran, Divtej thinking how to implement login time

@@ -12,6 +12,10 @@ mydb = mysql.connector.connect(
 my_cursor = mydb.cursor()
 
 my_cursor.execute(
+    "DROP DATABASE Alpha"
+    )
+
+my_cursor.execute(
     "CREATE DATABASE Alpha"
     )
 
@@ -330,17 +334,24 @@ INSERT INTO Takes VALUES ('3035756579', 'COMP3330'),('3035756579', 'COMP2119'),(
 
 ;""")
 
-#my_cursor.execute("""
+my_cursor.execute("""
 
-   # CREATE TABLE LoginHistory(
-        #UID varchar(255) NOT NULL,
-        #loginDate date NOT NULL,
-        #loginTime time NOT NULL,
-        #loginDuration time varchar(255) NOT NULL,
-        #PRIMARY KEY (loginDate),
-        #FOREIGN KEY (UID) REFERENCES Student(UID) ON DELETE CASCADE
-#) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-#;""")
+   CREATE TABLE LoginHistory(
+        UID varchar(255) NOT NULL,
+        loginDate date NOT NULL,
+        loginTime time NOT NULL,
+        loginDuration time NOT NULL,
+        PRIMARY KEY (loginDate, loginTime, UID)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+;""")
+
+my_cursor.execute("""
+
+INSERT INTO LoginHistory VALUES ('3035756579', '2022-11-19', '18:02:00', '01:03:00'), 
+                                ('3035756579', '2022-11-19', '17:30:00', '02:15:00'),
+                                ('3035756579', '2022-11-17', '16:29:00', '03:09:00'),
+                                ('3035756579', '2022-11-16', '14:18:00', '06:45:00')
+;""")
 
 mydb.commit()
 mydb.close()
