@@ -158,12 +158,32 @@ def ohc():
 
 
 
+# SMARAN'S WORK
+
+
+# Query5 to get Course details for all courses
+
+# SELECT C.CourseID, C.course_Name, C.Consultation_Location, C.Consultation_Time, C.Consultation_Day, C.Lecture_Location, C.Lecture_Day, C.Lecture_Start_Time, C.Lecture_End_Time, C.Tutorial_Day, C.Tutorial_Start_Time, C.Tutorial_End_Time, C.Tutorial_Location, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide, CCLM.Tutorial_Slide
+# FROM Student S, Course C, CourseMessage CM, Takes T, CourseContent CC, CourseContentLectureMaterial CCLM
+# WHERE S.UID = T.UID 
+# AND S.UID = '3035756579'
+# AND C.CourseID = T.CourseID
+# AND CM.CourseID = C.courseID 
+# AND CC.CourseID = C.courseID
+# AND C.courseID = CCLM.courseID;
 
 
 
-
-
-
+my_cursor.execute(
+    "SELECT C.CourseID, C.course_Name, C.Consultation_Location, C.Consultation_Time, C.Consultation_Day, C.Lecture_Location, C.Lecture_Day, C.Lecture_Start_Time, C.Lecture_End_Time, C.Tutorial_Location, C.Tutorial_Day, C.Tutorial_Start_Time, C.Tutorial_End_Time, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide, CCLM.Tutorial_Slide FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM WHERE S.UID = " + uid + "AND S.UID = T.UID  AND C.CourseID = T.CourseID AND CM.CourseID = C.courseID AND CC.CourseID = C.courseID AND CCLM.CourseID = C.courseID;"
+)
+values5 = my_cursor.fetchall()
+print(values5)
+@app.route('/one-hour-tutorial')
+def ohc():
+    return jsonify(CourseID=values3[0][0], CourseName=values3[0][1], Location=values3[0][2], 
+    ClassStart=str(values3[0][3]), ClassEnd=str(values3[0][4]), Message=values3[0][5], 
+    ZoomLink=values3[0][6], Slides=values3[0][7])
 
 
 
@@ -272,6 +292,9 @@ def ohc():
 
 
 # Smaran, Divtej thinking how to implement login time
+
+
+
 login_duration = datetime.now() - start_time
 
 if __name__ == '__main__':
