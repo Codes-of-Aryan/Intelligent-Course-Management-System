@@ -159,7 +159,7 @@ INSERT INTO Course VALUES ('COMP3278', 'Introduction to Database Management Syst
 my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3330', 'Introduction to Mobile App Development', 
-'Haking Wong RM#242', '10:30-11:30' ,'Friday', 'Saturday', '02:30', '14:20', 'LE2 Library Extension',
+'Haking Wong RM#242', '10:30-11:30' ,'Friday', 'Friday', '10:30', '12:20', 'LE2 Library Extension',
 'Thurday', '12:30', '13:20', 'LE2 Library Extension', 2)
 
 ;""")
@@ -167,7 +167,7 @@ INSERT INTO Course VALUES ('COMP3330', 'Introduction to Mobile App Development',
 my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3234', 'Computer Networks', 
-'Haking Wong RM#121', '14:30-16:30' ,'Friday', 'Saturday', '01:20', '11:20', 'CYPP2',
+'Haking Wong RM#121', '14:30-16:30' ,'Friday', 'Saturday', '23:06', '11:20', 'CYPP2',
 'Tuesday', '9:30', '10:20', 'CYPP2', 3)
 
 ;""")
@@ -176,7 +176,7 @@ my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP2119', 'Data Structures and Algorithms', 
 'KKLG838', '14:30-16:30' ,'Wednesday', 'Tuesday', '13:30', '16:20', 'KKLG603',
-'Monday', '11:30', '12:20', 'KKLG604', 4)
+'Saturday', '21:30', '12:20', 'KKLG604', 4)
 
 ;""")
 
@@ -291,6 +291,12 @@ INSERT INTO CourseContentLectureMaterial VALUES ('COMP3234',
 
 my_cursor.execute("""
 INSERT INTO CourseContentLectureMaterial VALUES ('COMP3278', 
+'lecture1.pdf', 'tutorial1.pdf')
+
+;""")
+
+my_cursor.execute("""
+INSERT INTO CourseContentLectureMaterial VALUES ('COMP2119', 
 'lecture1.pdf', 'tutorial1.pdf')
 
 ;""")

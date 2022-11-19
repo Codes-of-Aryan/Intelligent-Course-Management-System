@@ -106,12 +106,25 @@ def index():
 # CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide
 # FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM
 # WHERE S.UID = T.UID 
+# AND C.CourseID = T.CourseID 
+# AND CM.CourseID = C.courseID 
+# AND CC.CourseID = C.courseID 
+# AND CCLM.CourseID = C.courseID 
+# AND C.Lecture_Day = DAYNAME(Current_Date()) 
+# AND (SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Lecture_Start_Time, CURRENT_TIME)))) = 0;
+
+# Query to get course details within 1hr tutorial 
+
+# SELECT C.CourseID, C.course_Name, C.Tutorial_Location, C.Tutorial_Start_Time, C.Tutorial_End_Time, 
+# CM.Message, CC.Zoom_Link, CCLM.Tutorial_Slide
+# FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM
+# WHERE S.UID = T.UID 
 # AND C.CourseID = T.CourseID
 # AND CM.CourseID = C.courseID 
 # AND CC.CourseID = C.courseID
 # AND CCLM.CourseID = C.courseID
-# AND C.Lecture_Day = DAYNAME(Current_Date()) 
-# AND TIMEDIFF(C.Lecture_Start_Time, Current_Time()) < '00:60:00';
+# AND C.Tutorial_Day = DAYNAME(Current_Date()) 
+# AND (SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Tutorial_Start_Time, CURRENT_TIME)))) = 0;
 
 # Jsonify code (updated) -> 
 # List course(lecture or tutorial) contents from the takes table
