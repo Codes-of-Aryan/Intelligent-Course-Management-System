@@ -5,7 +5,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "",  #change password to your own
+    password = "011110067",  #change password to your own
     auth_plugin='mysql_native_password',
 )
 
@@ -151,7 +151,7 @@ my_cursor.execute("""
 my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3278', 'Introduction to Database Management Systems', 
-'Haking Wong RM#322', '12:30-13:30' ,'Thurday', 'Sunday', '04:30', '15:20', 'MWT2 Meng Wah Complex',
+'Haking Wong RM#322', '12:30-13:30' ,'Thurday', 'Sunday', '12:30', '15:20', 'MWT2 Meng Wah Complex',
 'Thurday', '13:30', '15:20', 'MWT2 Meng Wah Complex', 1)
 
 ;""")
@@ -168,7 +168,7 @@ my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3234', 'Computer Networks', 
 'Haking Wong RM#121', '14:30-16:30' ,'Friday', 'Saturday', '23:06', '11:20', 'CYPP2',
-'Tuesday', '9:30', '10:20', 'CYPP2', 3)
+'Sunday', '5:30', '10:20', 'CYPP2', 3)
 
 ;""")
 
@@ -237,28 +237,28 @@ my_cursor.execute("""
 my_cursor.execute("""
 
 INSERT INTO CourseContent VALUES ('COMP3278', 
-'hku.comp3278.zoom.us')
+'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09#success')
 
 ;""")
 
 my_cursor.execute("""
 
 INSERT INTO CourseContent VALUES ('COMP3330', 
-'hku.comp3330.zoom.us')
+'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09#success')
 
 ;""")
 
 my_cursor.execute("""
 
 INSERT INTO CourseContent VALUES ('COMP3234', 
-'hku.comp3234.zoom.us')
+'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09#success')
 
 ;""")
 
 my_cursor.execute("""
 
 INSERT INTO CourseContent VALUES ('COMP2119', 
-'hku.comp2119.zoom.us')
+'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09#success')
 
 ;""")
 

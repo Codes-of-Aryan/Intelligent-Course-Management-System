@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 function Home() {
   const [name, setName] = useState([]);
   const [course, setCourses] = useState([]);
+  const [tutorial , setTutorial] = useState([]);
 
   useEffect(() => {
     fetch("/student-details")
@@ -29,6 +30,15 @@ function Home() {
       .then((course) => {
         setCourses(course);
         console.log(course);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("/one-hour-tutorial")
+      .then((res) => res.json())
+      .then((tutorial) => {
+        setTutorial(tutorial);
+        console.log(tutorial);
       });
   }, []);
 
@@ -137,7 +147,92 @@ function Home() {
                     </Row>
                     <Row style={{ display: "flex", flexDirection: "column" }}>
                       {/* <h6 style={{ marginTop: '6%' }}>dummy course</h6> */}
-                      <a href={"https://" + course.ZoomLink} target='_blank'>
+                      <a href={"" + course.ZoomLink} target='_blank'>
+                      <Button
+                        style={{
+                          background:
+                            "linear-gradient(0deg, #006EF4, #006EF4), #FFFFFF",
+                          width: "50%",
+                          margin: "auto",
+                          marginTop: "6%",
+                        }}
+                      >
+                        Open Link
+                      </Button>
+                      </a>
+                      <Button
+                        style={{
+                          background:
+                            "linear-gradient(0deg, #F47500, #F47500), #FFFFFF",
+                          width: "50%",
+                          margin: "auto",
+                          marginTop: "6%",
+                        }}
+                      >
+                        Send to Email
+                      </Button>
+                    </Row>
+                  </Col>
+                </Row>
+              </Container>
+              <Container>
+                <Row>
+                  <Col className="col-2">
+                    <Row>
+                      <h5 style={{ fontWeight: "bold" }}>Tutorial</h5>
+                    </Row>
+                    <Row>
+                      <h6 style={{ marginTop: "40%" }}>{tutorial.CourseID + " " + tutorial.CourseName}</h6>
+                    </Row>
+                  </Col>
+                  <Col className="col-2">
+                    <Row>
+                      <h5 style={{ fontWeight: "bold" }}>Time</h5>
+                    </Row>
+                    <Row>
+                      <h6 style={{ marginTop: "40%" }}>{tutorial.ClassStart}</h6>
+                    </Row>
+                  </Col>
+                  <Col className="col-2">
+                    <Row>
+                      <h5 style={{ fontWeight: "bold" }}>Classroom</h5>
+                    </Row>
+                    <Row>
+                      <h6 style={{ marginTop: "40%" }}>{tutorial.Location}</h6>
+                    </Row>
+                  </Col>
+                  <Col className="col-2">
+                    <Row>
+                      <h5 style={{ fontWeight: "bold" }}>
+                        Lecture/Tutorial Notes
+                      </h5>
+                    </Row>
+                    <Row>
+                      <h6 style={{ marginTop: "29%" }}>{tutorial.Slides}</h6>
+                    </Row>
+                  </Col>
+                  <Col className="col-2">
+                    <Row>
+                      <h5 style={{ fontWeight: "bold" }}>Notes from Teacher</h5>
+                    </Row>
+                    <Row>
+                      <h6 style={{ marginTop: "40%" }}>{tutorial.Message}</h6>
+                    </Row>
+                  </Col>
+                  <Col className="col-2">
+                    <Row
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <h5 style={{ fontWeight: "bold" }}>
+                        Zoom Link/Send to Email
+                      </h5>
+                    </Row>
+                    <Row style={{ display: "flex", flexDirection: "column" }}>
+                      {/* <h6 style={{ marginTop: '6%' }}>dummy tutorial</h6> */}
+                      <a href={"" + course.ZoomLink} target='_blank'>
                       <Button
                         style={{
                           background:

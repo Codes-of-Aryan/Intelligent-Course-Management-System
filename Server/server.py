@@ -75,7 +75,7 @@ app = Flask(__name__)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="",  # change password to your own
+    passwd="011110067",  # change password to your own
     auth_plugin='mysql_native_password'
 )
 # create cursor object
@@ -121,9 +121,9 @@ def ohc():
         ClassStart=str(values2[0][3]), ClassEnd=str(values2[0][4]), Message=values2[0][5], 
         ZoomLink=values2[0][6], Slides=values2[0][7])
     else:
-        return jsonify(CourseID="No Lecture in Next Hour", CourseName="", Location="", 
-        ClassStart="", ClassEnd="", Message="", 
-        ZoomLink="", Slides="")
+        return jsonify(CourseID= "NO UPCOMING LECTURE IN AN HOUR", CourseName="", Location="-", 
+        ClassStart="-", ClassEnd="-", Message="-", 
+        ZoomLink="-", Slides="-")
 
 
 
@@ -149,9 +149,14 @@ values3 = my_cursor.fetchall()
 print(values3)
 @app.route('/one-hour-tutorial')
 def oht():
-    return jsonify(CourseID=values3[0][0], CourseName=values3[0][1], Location=values3[0][2], 
-    ClassStart=str(values3[0][3]), ClassEnd=str(values3[0][4]), Message=values3[0][5], 
-    ZoomLink=values3[0][6], Slides=values3[0][7])
+    if (len(values3) != 0):
+        return jsonify(CourseID=values3[0][0], CourseName=values3[0][1], Location=values3[0][2], 
+        ClassStart=str(values3[0][3]), ClassEnd=str(values3[0][4]), Message=values3[0][5], 
+        ZoomLink=values3[0][6], Slides=values3[0][7])
+    else:
+        return jsonify(CourseID= "NO UPCOMING TUTORIAL IN AN HOUR", CourseName="", Location="-", 
+        ClassStart="-", ClassEnd="-", Message="-", 
+        ZoomLink="-", Slides="-")
 
 
 # Query4 to get course name and course code for profile page of user
@@ -195,10 +200,6 @@ def courseDetails():
     LectureDay=values5[0][6], LectureStartTime=str(values5[0][7]), LectureEndTime=str(values5[0][8]), TutorialLocation=values5[0][9], 
     TutoriaDay=values5[0][10], TutorialStartTime=str(values5[0][11]), TutorialEndTime=str(values5[0][12]), Message=values5[0][13], 
     ZoomLink=values5[0][14], LectureSlides=values5[0][15], TutorialSlides=values5[0][16])
-
-
-
-
 
 
 
