@@ -151,7 +151,7 @@ my_cursor.execute("""
 my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3278', 'Introduction to Database Management Systems', 
-'Haking Wong RM#322', '12:30-13:30' ,'Thurday', 'Monday', '14:30', '15:20', 'MWT2 Meng Wah Complex',
+'Haking Wong RM#322', '12:30-13:30' ,'Thurday', 'Sunday', '04:30', '15:20', 'MWT2 Meng Wah Complex',
 'Thurday', '13:30', '15:20', 'MWT2 Meng Wah Complex', 1)
 
 ;""")

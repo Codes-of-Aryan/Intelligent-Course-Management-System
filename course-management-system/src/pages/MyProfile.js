@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 
 function MyProfile() {
   const [student, setStudent] = useState([]);
+  const [course, setCourses] = useState([]);
 
   useEffect(() => {
     fetch("/student-details")
@@ -21,6 +22,15 @@ function MyProfile() {
       .then((student) => {
         setStudent(student);
         console.log(student);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("/courses")
+      .then((res) => res.json())
+      .then((course) => {
+        setCourses(course);
+        console.log(course);
       });
   }, []);
 

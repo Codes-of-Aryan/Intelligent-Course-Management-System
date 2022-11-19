@@ -21,7 +21,8 @@ This would simply return the name of the user
 detected by the recognition back to this file  
 in the file '''
 
-name = recognize()
+# name = recognize()
+name = 'Abdur,3035756579'
 start_time = datetime.now()
 
 
@@ -109,15 +110,23 @@ def studentDetails():
 # AND C.Lecture_Day = DAYNAME(Current_Date()) 
 # AND (SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Lecture_Start_Time, CURRENT_TIME)))) = 0;
 my_cursor.execute(
-    "SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Start_Time, C.Lecture_End_Time, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM WHERE S.UID = " + uid + "AND S.UID = T.UID  AND C.CourseID = T.CourseID AND CM.CourseID = C.courseID AND CC.CourseID = C.courseID AND CCLM.CourseID = C.courseID AND C.Lecture_Day = DAYNAME(Current_Date()) AND (SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Lecture_Start_Time, CURRENT_TIME)))) = 0; "
+    "SELECT C.CourseID, C.course_Name, C.Lecture_Location, C.Lecture_Start_Time, C.Lecture_End_Time, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide FROM (Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM) WHERE (S.UID = " + uid + ") AND (S.UID = T.UID)  AND (C.CourseID = T.CourseID) AND (CM.CourseID = C.courseID) AND (CC.CourseID = C.courseID) AND (CCLM.CourseID = C.courseID) AND (C.Lecture_Day = DAYNAME(Current_Date())) AND ((SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Lecture_Start_Time, CURRENT_TIME)))) = 0); "
 )
 values2 = my_cursor.fetchall()
 print(values2)
 @app.route('/one-hour-course')
 def ohc():
-    return jsonify(CourseID=values2[0][0], CourseName=values2[0][1], Location=values2[0][2], 
-    ClassStart=str(values2[0][3]), ClassEnd=str(values2[0][4]), Message=values2[0][5], 
-    ZoomLink=values2[0][6], Slides=values2[0][7])
+    if (len(values2) != 0):
+        return jsonify(CourseID=values2[0][0], CourseName=values2[0][1], Location=values2[0][2], 
+        ClassStart=str(values2[0][3]), ClassEnd=str(values2[0][4]), Message=values2[0][5], 
+        ZoomLink=values2[0][6], Slides=values2[0][7])
+    else:
+        return jsonify(CourseID="No Lecture in Next Hour", CourseName="", Location="", 
+        ClassStart="", ClassEnd="", Message="", 
+        ZoomLink="", Slides="")
+
+
+
 
 
 
@@ -134,12 +143,12 @@ def ohc():
 # AND C.Tutorial_Day = DAYNAME(Current_Date()) 
 # AND (SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Tutorial_Start_Time, CURRENT_TIME)))) = 0;
 my_cursor.execute(
-    "SELECT C.CourseID, C.course_Name, C.Tutorial_Location, C.Tutorial_Start_Time, C.Tutorial_End_Time, CM.Message, CC.Zoom_Link, CCLM.Tutorial_Slide FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM WHERE S.UID = " + uid + "AND S.UID = T.UID  AND C.CourseID = T.CourseID AND CM.CourseID = C.courseID AND CC.CourseID = C.courseID AND CCLM.CourseID = C.courseID AND C.Tutorial_Day = DAYNAME(Current_Date()) AND (SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Tutorial_Start_Time, CURRENT_TIME)))) = 0; "
+    "SELECT C.CourseID, C.course_Name, C.Tutorial_Location, C.Tutorial_Start_Time, C.Tutorial_End_Time, CM.Message, CC.Zoom_Link, CCLM.Tutorial_Slide FROM (Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM) WHERE (S.UID = " + uid + ") AND (S.UID = T.UID) AND (C.CourseID = T.CourseID) AND (CM.CourseID = C.courseID) AND (CC.CourseID = C.courseID) AND (CCLM.CourseID = C.courseID) AND (C.Tutorial_Day = DAYNAME(Current_Date())) AND ((SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Tutorial_Start_Time, CURRENT_TIME)))) = 0); "
 )
 values3 = my_cursor.fetchall()
 print(values3)
 @app.route('/one-hour-tutorial')
-def ohc():
+def oht():
     return jsonify(CourseID=values3[0][0], CourseName=values3[0][1], Location=values3[0][2], 
     ClassStart=str(values3[0][3]), ClassEnd=str(values3[0][4]), Message=values3[0][5], 
     ZoomLink=values3[0][6], Slides=values3[0][7])
@@ -147,12 +156,12 @@ def ohc():
 
 # Query4 to get course name and course code for profile page of user
 my_cursor.execute(
-    "SELECT T.CourseID, C.course_Name FROM Student S, Takes T, Course C WHERE S.UID = T.UID  AND C.CourseID = T.CourseID AND S.UID = " + uid + ";"
+    "SELECT T.CourseID, C.course_Name FROM (Student S, Takes T, Course C) WHERE (S.UID = T.UID)  AND (C.CourseID = T.CourseID) AND (S.UID = " + uid + ");"
 )
 values4 = my_cursor.fetchall()
 print(values4)
-@app.route('/one-hour-tutorial')
-def ohc():
+@app.route('/courses')
+def courses():
     return jsonify(CourseID=values4[0][0], CourseName=values4[0][1])
 
 
@@ -175,12 +184,12 @@ def ohc():
 
 
 my_cursor.execute(
-    "SELECT C.CourseID, C.course_Name, C.Consultation_Location, C.Consultation_Time, C.Consultation_Day, C.Lecture_Location, C.Lecture_Day, C.Lecture_Start_Time, C.Lecture_End_Time, C.Tutorial_Location, C.Tutorial_Day, C.Tutorial_Start_Time, C.Tutorial_End_Time, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide, CCLM.Tutorial_Slide FROM Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM WHERE S.UID = " + uid + "AND S.UID = T.UID  AND C.CourseID = T.CourseID AND CM.CourseID = C.courseID AND CC.CourseID = C.courseID AND CCLM.CourseID = C.courseID;"
+    "SELECT C.CourseID, C.course_Name, C.Consultation_Location, C.Consultation_Time, C.Consultation_Day, C.Lecture_Location, C.Lecture_Day, C.Lecture_Start_Time, C.Lecture_End_Time, C.Tutorial_Location, C.Tutorial_Day, C.Tutorial_Start_Time, C.Tutorial_End_Time, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide, CCLM.Tutorial_Slide FROM (Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM) WHERE (S.UID = " + uid + ") AND (S.UID = T.UID)  AND (C.CourseID = T.CourseID) AND (CM.CourseID = C.courseID) AND (CC.CourseID = C.courseID) AND (CCLM.CourseID = C.courseID);"
 )
 values5 = my_cursor.fetchall()
 print(values5)
-@app.route('/one-hour-tutorial')
-def ohc():
+@app.route('/course-details')
+def courseDetails():
     return jsonify(CourseID=values5[0][0], CourseName=values5[0][1], ConsultationLocation=values5[0][2], 
     ConsultationTime=str(values5[0][3]), ConsultationDay=(values5[0][4]), LectureLocation=values5[0][5], 
     LectureDay=values5[0][6], LectureStartTime=str(values5[0][7]), LectureEndTime=str(values5[0][8]), TutorialLocation=values5[0][9], 

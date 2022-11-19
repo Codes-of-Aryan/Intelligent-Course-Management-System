@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   const [name, setName] = useState([]);
+  const [course, setCourses] = useState([]);
 
   useEffect(() => {
     fetch("/student-details")
@@ -19,6 +20,15 @@ function Home() {
       .then((name) => {
         setName(name);
         console.log(name);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("/one-hour-course")
+      .then((res) => res.json())
+      .then((course) => {
+        setCourses(course);
+        console.log(course);
       });
   }, []);
 
@@ -77,7 +87,7 @@ function Home() {
                       <h5 style={{ fontWeight: "bold" }}>Course</h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "40%" }}>dummy course</h6>
+                      <h6 style={{ marginTop: "40%" }}>{course.CourseID + " " + course.CourseName}</h6>
                     </Row>
                   </Col>
                   <Col className="col-2">
@@ -85,7 +95,7 @@ function Home() {
                       <h5 style={{ fontWeight: "bold" }}>Time</h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "40%" }}>dummy course</h6>
+                      <h6 style={{ marginTop: "40%" }}>{course.ClassStart}</h6>
                     </Row>
                   </Col>
                   <Col className="col-2">
@@ -93,7 +103,7 @@ function Home() {
                       <h5 style={{ fontWeight: "bold" }}>Classroom</h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "40%" }}>dummy course</h6>
+                      <h6 style={{ marginTop: "40%" }}>{course.Location}</h6>
                     </Row>
                   </Col>
                   <Col className="col-2">
@@ -103,7 +113,7 @@ function Home() {
                       </h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "29%" }}>dummy course</h6>
+                      <h6 style={{ marginTop: "29%" }}>{course.Slides}</h6>
                     </Row>
                   </Col>
                   <Col className="col-2">
@@ -111,7 +121,7 @@ function Home() {
                       <h5 style={{ fontWeight: "bold" }}>Notes from Teacher</h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "40%" }}>dummy course</h6>
+                      <h6 style={{ marginTop: "40%" }}>{course.Message}</h6>
                     </Row>
                   </Col>
                   <Col className="col-2">
@@ -127,6 +137,7 @@ function Home() {
                     </Row>
                     <Row style={{ display: "flex", flexDirection: "column" }}>
                       {/* <h6 style={{ marginTop: '6%' }}>dummy course</h6> */}
+                      <a href={"https://" + course.ZoomLink} target='_blank'>
                       <Button
                         style={{
                           background:
@@ -138,6 +149,7 @@ function Home() {
                       >
                         Open Link
                       </Button>
+                      </a>
                       <Button
                         style={{
                           background:
