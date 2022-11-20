@@ -14,6 +14,7 @@ function Home() {
   const [name, setName] = useState([]);
   const [course, setCourse] = useState([]);
   const [tutorial , setTutorial] = useState([]);
+  const [courseList, setCourseList] = useState([]);
 
   useEffect(() => {
     fetch("/student-details")
@@ -42,6 +43,13 @@ function Home() {
       });
   }, []);
 
+  fetch("/courses")
+      .then((res) => res.json())
+      .then((info) => {
+        setCourseList(info);
+        console.log(courseList);
+      });
+
   return (
     <Container fluid style={{ background: "#C3EAFB" }}>
       <Row style={{ textAlign: "center", backgroundColor: "#FFFCB2" }}>
@@ -50,6 +58,13 @@ function Home() {
         </h1>
       </Row>
       <Row style={{ height: "17vh" }}>
+      <Card>
+      <Link to='/my-courses' state={courseList}>
+      <Card.Body>
+          <h3 style={{ textAlign: "center" }}>My Courses</h3>
+        </Card.Body>
+      </Link>
+      </Card>
         <Col className="col-5">
           <img
             src={profilePhoto}
