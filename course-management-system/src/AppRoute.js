@@ -6,6 +6,7 @@ import LoginActivity from "./pages/LoginActivity";
 import Welcome from "./pages/Welcome";
 import MyCourses from "./pages/MyCourses";
 import MyProfile from "./pages/MyProfile";
+import CourseDetail from "./pages/CourseDetail";
 
 function AppRoutes() {
   return (
@@ -18,6 +19,7 @@ function AppRoutes() {
                 <Route path="/weekly-schedule" element={<WeeklySchedule />} />
                 <Route path="/my-courses" element={<MyCourses />} />
                 <Route path="/my-profile" element={<MyProfile />} />
+                <Route path="/course-detail" element={<CourseDetail />} />
             </Routes>
         </Router>
     </>

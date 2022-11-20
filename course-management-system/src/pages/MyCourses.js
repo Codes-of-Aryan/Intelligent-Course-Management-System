@@ -15,6 +15,14 @@ function MyCourses() {
   console.log(location.state);
   const courses = location.state;
   console.log(courses);
+
+  const [courseDetail, setCourseDetail] = useState([]);
+
+  fetch("/course-details")
+  .then((res) => res.json())
+  .then((info) => {
+    setCourseDetail(info);
+  });
   // const [courses, setCourses] = useState([]);
 
   // useEffect(() => {
@@ -56,7 +64,7 @@ function MyCourses() {
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             }}
           >
-            <Card.Body
+          <Link to="/course-detail" state={courseDetail}><Card.Body
               style={{
                 display: "flex",
                 flexDirection: "row",
@@ -65,7 +73,7 @@ function MyCourses() {
               }}
             >
               <h3 style={{ fontWeight: "bold" }}>{courses.courseDetails[0]}</h3>
-            </Card.Body>
+            </Card.Body></Link>
           </Card>
         </Col>
         <Col>

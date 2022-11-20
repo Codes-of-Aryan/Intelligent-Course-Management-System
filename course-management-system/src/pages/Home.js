@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 function Home() {
   const [name, setName] = useState([]);
   const [course, setCourse] = useState([]);
-  const [tutorial , setTutorial] = useState([]);
+  const [tutorial, setTutorial] = useState([]);
   const [courseList, setCourseList] = useState([]);
 
   useEffect(() => {
@@ -44,11 +44,11 @@ function Home() {
   }, []);
 
   fetch("/courses")
-      .then((res) => res.json())
-      .then((info) => {
-        setCourseList(info);
-        console.log(courseList);
-      });
+    .then((res) => res.json())
+    .then((info) => {
+      setCourseList(info);
+      console.log(courseList);
+    });
 
   return (
     <Container fluid style={{ background: "#C3EAFB" }}>
@@ -58,13 +58,20 @@ function Home() {
         </h1>
       </Row>
       <Row style={{ height: "17vh" }}>
-      <Card>
-      <Link to='/my-courses' state={courseList}>
-      <Card.Body>
-          <h3 style={{ textAlign: "center" }}>My Courses</h3>
-        </Card.Body>
-      </Link>
-      </Card>
+        <Card>
+          <Link to="/my-courses" state={courseList}>
+            <Card.Body>
+              <h3 style={{ textAlign: "center" }}>My Courses</h3>
+            </Card.Body>
+          </Link>
+        </Card>
+        <Card>
+          <Link to="/my-profile" state={courseList}>
+            <Card.Body>
+              <h3 style={{ textAlign: "center" }}>My Profile</h3>
+            </Card.Body>
+          </Link>
+        </Card>
         <Col className="col-5">
           <img
             src={profilePhoto}
@@ -81,7 +88,7 @@ function Home() {
         <Col className="col-7">
           <h1 style={{ marginTop: "7%" }}>
             <span style={{ color: "#7978FF" }}>Welcome </span>
-            { ", " + name.f_name+ " " + name.l_name + "!"}
+            {", " + name.f_name + " " + name.l_name + "!"}
           </h1>
           <p
             style={{ color: "#748DA6", fontWeight: "bold", paddingLeft: "5px" }}
@@ -101,7 +108,7 @@ function Home() {
               backgroundColor: "#A6E4FF",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               width: "90%",
-              margin: 'auto'
+              margin: "auto",
             }}
           >
             <Card.Body>
@@ -112,7 +119,9 @@ function Home() {
                       <h5 style={{ fontWeight: "bold" }}>Course</h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "40%" }}>{course.CourseID + " " + course.CourseName}</h6>
+                      <h6 style={{ marginTop: "40%" }}>
+                        {course.CourseID + " " + course.CourseName}
+                      </h6>
                     </Row>
                   </Col>
                   <Col className="col-2">
@@ -162,18 +171,18 @@ function Home() {
                     </Row>
                     <Row style={{ display: "flex", flexDirection: "column" }}>
                       {/* <h6 style={{ marginTop: '6%' }}>dummy course</h6> */}
-                      <a href={"" + course.ZoomLink} target='_blank'>
-                      <Button
-                        style={{
-                          background:
-                            "linear-gradient(0deg, #006EF4, #006EF4), #FFFFFF",
-                          width: "50%",
-                          margin: "auto",
-                          marginTop: "6%",
-                        }}
-                      >
-                        Open Link
-                      </Button>
+                      <a href={"" + course.ZoomLink} target="_blank">
+                        <Button
+                          style={{
+                            background:
+                              "linear-gradient(0deg, #006EF4, #006EF4), #FFFFFF",
+                            width: "50%",
+                            margin: "auto",
+                            marginTop: "6%",
+                          }}
+                        >
+                          Open Link
+                        </Button>
                       </a>
                       <Button
                         style={{
@@ -197,7 +206,9 @@ function Home() {
                       <h5 style={{ fontWeight: "bold" }}>Tutorial</h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "40%" }}>{tutorial.CourseID + " " + tutorial.CourseName}</h6>
+                      <h6 style={{ marginTop: "40%" }}>
+                        {tutorial.CourseID + " " + tutorial.CourseName}
+                      </h6>
                     </Row>
                   </Col>
                   <Col className="col-2">
@@ -205,7 +216,9 @@ function Home() {
                       <h5 style={{ fontWeight: "bold" }}>Time</h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "40%" }}>{tutorial.ClassStart}</h6>
+                      <h6 style={{ marginTop: "40%" }}>
+                        {tutorial.ClassStart}
+                      </h6>
                     </Row>
                   </Col>
                   <Col className="col-2">
@@ -247,18 +260,18 @@ function Home() {
                     </Row>
                     <Row style={{ display: "flex", flexDirection: "column" }}>
                       {/* <h6 style={{ marginTop: '6%' }}>dummy tutorial</h6> */}
-                      <a href={"" + course.ZoomLink} target='_blank'>
-                      <Button
-                        style={{
-                          background:
-                            "linear-gradient(0deg, #006EF4, #006EF4), #FFFFFF",
-                          width: "50%",
-                          margin: "auto",
-                          marginTop: "6%",
-                        }}
-                      >
-                        Open Link
-                      </Button>
+                      <a href={"" + course.ZoomLink} target="_blank">
+                        <Button
+                          style={{
+                            background:
+                              "linear-gradient(0deg, #006EF4, #006EF4), #FFFFFF",
+                            width: "50%",
+                            margin: "auto",
+                            marginTop: "6%",
+                          }}
+                        >
+                          Open Link
+                        </Button>
                       </a>
                       <Button
                         style={{
