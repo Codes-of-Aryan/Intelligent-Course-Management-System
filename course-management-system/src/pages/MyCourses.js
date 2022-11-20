@@ -8,10 +8,22 @@ import myProfile from "../assets/myprofile.png";
 import weeklySchedule from "../assets/weeklyschedule.png";
 import arrows from "../assets/arrows.png";
 import zoom from "../assets/zoom.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function MyCourses() {
-  const [courses, setCourses] = useState([]);
+  const location = useLocation();
+  console.log(location.state);
+  const courses = location.state;
+  console.log(courses);
+
+  const [courseDetail, setCourseDetail] = useState([]);
+
+  fetch("/course-details")
+  .then((res) => res.json())
+  .then((info) => {
+    setCourseDetail(info);
+  });
+  // const [courses, setCourses] = useState([]);
 
   // useEffect(() => {
   //   fetch("/courses")
@@ -22,13 +34,13 @@ function MyCourses() {
   //     });
   // }, []);
 
-  fetch("/courses")
-      .then((res) => res.json())
-      .then((info) => {
-        setCourses(info);
-        console.log("hello");
-      }
-  );
+  // fetch("/courses")
+  //     .then((res) => res.json())
+  //     .then((info) => {
+  //       setCourses(info);
+  //       console.log("hello");
+  //     }
+  // );
 
   return (
     <Container fluid style={{ background: "#C3EAFB", height: "100vh" }}>
@@ -52,7 +64,7 @@ function MyCourses() {
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             }}
           >
-            <Card.Body
+          <Link to="/course-detail" state={courseDetail}><Card.Body
               style={{
                 display: "flex",
                 flexDirection: "row",
@@ -60,8 +72,8 @@ function MyCourses() {
                 textAlign: "right",
               }}
             >
-              <h3 style={{ fontWeight: "bold" }}></h3>
-            </Card.Body>
+              <h3 style={{ fontWeight: "bold" }}>{courses.courseDetails[0]}</h3>
+            </Card.Body></Link>
           </Card>
         </Col>
         <Col>
@@ -81,7 +93,7 @@ function MyCourses() {
                 textAlign: "right",
               }}
             >
-              <h3 style={{ fontWeight: "bold" }}>{courses && courses.courseDetails[1]}</h3>
+              <h3 style={{ fontWeight: "bold" }}>{courses.courseDetails[1]}</h3>
             </Card.Body>
           </Card>
         </Col>

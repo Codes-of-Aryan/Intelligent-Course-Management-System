@@ -10,9 +10,13 @@ import arrows from "../assets/arrows.png";
 import zoom from "../assets/zoom.png";
 import userDetails from "../assets/userdetails.png";
 import coursedetails from "../assets/coursedetails.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function MyProfile() {
+  const location = useLocation();
+  console.log(location.state);
+  const courses = location.state;
+  console.log(courses);
   const [name, setName] = useState([]);
   
 
@@ -145,6 +149,10 @@ function MyProfile() {
         <h3 style={{ marginTop: "2%" }}>Navigation</h3>
         <Card style={{ width: "90%", margin: "auto" }}>
           <Card.Body>
+          <h5>{courses.courseDetails[0]}</h5>
+          <h5>{courses.courseDetails[1]}</h5>
+          <h5>{courses.courseDetails[2]}</h5>
+          <h5>{courses.courseDetails[3]}</h5>
           </Card.Body>
         </Card>
       </Row>

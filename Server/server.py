@@ -186,17 +186,17 @@ def courses():
 # AND C.courseID = CCLM.courseID;
 
 my_cursor.execute(
-    "SELECT C.CourseID, C.course_Name, C.Consultation_Location, C.Consultation_Time, C.Consultation_Day, C.Lecture_Location, C.Lecture_Day, C.Lecture_Start_Time, C.Lecture_End_Time, C.Tutorial_Location, C.Tutorial_Day, C.Tutorial_Start_Time, C.Tutorial_End_Time, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide, CCLM.Tutorial_Slide FROM (Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM) WHERE (S.UID = " + uid + ") AND (S.UID = T.UID)  AND (C.CourseID = T.CourseID) AND (CM.CourseID = C.courseID) AND (CC.CourseID = C.courseID) AND (CCLM.CourseID = C.courseID);"
+    "SELECT C.CourseID, C.course_Name, P.First_Name, P.Last_Name, P.Email, C.Consultation_Location, C.Consultation_Time, C.Consultation_Day, C.Lecture_Location, C.Lecture_Day, C.Lecture_Start_Time, C.Lecture_End_Time, C.Tutorial_Location, C.Tutorial_Day, C.Tutorial_Start_Time, C.Tutorial_End_Time, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide, CCLM.Tutorial_Slide, P.DepartmentName FROM (Student S, Course C, Professor P, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM) WHERE (P.StaffID = C.StaffID) AND (S.UID = " + uid + ") AND (S.UID = T.UID)  AND (C.CourseID = T.CourseID) AND (CM.CourseID = C.courseID) AND (CC.CourseID = C.courseID) AND (CCLM.CourseID = C.courseID);"
 )
 values5 = my_cursor.fetchall()
 # print(values5)
 @app.route('/course-details')
 def courseDetails():
-    return jsonify(CourseID=values5[0][0], CourseName=values5[0][1], ConsultationLocation=values5[0][2], 
-    ConsultationTime=str(values5[0][3]), ConsultationDay=(values5[0][4]), LectureLocation=values5[0][5], 
-    LectureDay=values5[0][6], LectureStartTime=str(values5[0][7]), LectureEndTime=str(values5[0][8]), TutorialLocation=values5[0][9], 
-    TutoriaDay=values5[0][10], TutorialStartTime=str(values5[0][11]), TutorialEndTime=str(values5[0][12]), Message=values5[0][13], 
-    ZoomLink=values5[0][14], LectureSlides=values5[0][15], TutorialSlides=values5[0][16])
+    return jsonify(CourseID=values5[0][0], CourseName=values5[0][1], ProfessorFirstName=values5[0][2], ProfessorLastName=values5[0][3], ProfessorEmail = values5[0][4], ConsultationLocation=values5[0][5], 
+    ConsultationTime=str(values5[0][6]), ConsultationDay=(values5[0][7]), LectureLocation=values5[0][8], 
+    LectureDay=values5[0][9], LectureStartTime=str(values5[0][10]), LectureEndTime=str(values5[0][11]), TutorialLocation=values5[0][12], 
+    TutorialDay=values5[0][13], TutorialStartTime=str(values5[0][14]), TutorialEndTime=str(values5[0][15]), Message=values5[0][16], 
+    ZoomLink=values5[0][17], LectureSlides=values5[0][18], TutorialSlides=values5[0][19], ProfessorDepartment=values5[0][20])
 
 
 
@@ -214,7 +214,19 @@ values6 = my_cursor.fetchall()
 # print(values5)Q
 @app.route('/login-details')
 def loginDetails():
-    return jsonify(#ADD HERE -> MULTIPLE ROW RETURN#)
+    l_date = []
+    l_time = []
+    l_duration = []
+    l_all = []
+
+    for i in valuesx:
+        l_date.append(str(i[0]))
+        l_time.append(str(i[1]))
+        l_duration.append(str(i[2]))
+
+    for i in range(len(l_date)):
+        l_all.append(l_date[i] + " " + l_time[i] + " " + l_duration[i])
+    return jsonify(loginDetails = l_all)
 
 # DO NOT READ BELOW THIS
 
