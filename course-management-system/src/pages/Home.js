@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   const [name, setName] = useState([]);
-  const [course, setCourses] = useState([]);
+  const [course, setCourse] = useState([]);
   const [tutorial , setTutorial] = useState([]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function Home() {
     fetch("/one-hour-course")
       .then((res) => res.json())
       .then((course) => {
-        setCourses(course);
+        setCourse(course);
         console.log(course);
       });
   }, []);

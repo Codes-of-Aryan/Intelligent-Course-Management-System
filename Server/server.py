@@ -174,7 +174,7 @@ my_cursor.execute(
     "SELECT T.CourseID, C.course_Name FROM (Student S, Takes T, Course C) WHERE (S.UID = T.UID)  AND (C.CourseID = T.CourseID) AND (S.UID = " + uid + ");"
 )
 valuesx = my_cursor.fetchall()
-print(valuesx)
+print("valuesx: ", valuesx)
 @app.route('/courses')
 def courses():
     c_name = []

@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 function MyProfile() {
   const [name, setName] = useState([]);
-  const [courses, setCourses] = useState([]);
+  
 
   useEffect(() => {
     fetch("/student-details")
@@ -25,14 +25,6 @@ function MyProfile() {
       });
   }, []);
 
-  useEffect(() => {
-    fetch("/courses")
-      .then((res) => res.json())
-      .then((courses) => {
-        setCourses(courses);
-        console.log(courses);
-      });
-  }, []);
 
   return (
     <Container fluid style={{ background: "#C3EAFB", height: "100vh" }}>
@@ -153,10 +145,6 @@ function MyProfile() {
         <h3 style={{ marginTop: "2%" }}>Navigation</h3>
         <Card style={{ width: "90%", margin: "auto" }}>
           <Card.Body>
-            <h5>{courses.courseDetails[0]}</h5>
-            <h5>{courses.courseDetails[1]}</h5>
-            <h5>{courses.courseDetails[2]}</h5>
-            <h5>{courses.courseDetails[3]}</h5>
           </Card.Body>
         </Card>
       </Row>
