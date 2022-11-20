@@ -396,7 +396,7 @@ function Home() {
                       </Row>
                       <Row style={{ display: "flex", flexDirection: "column" }}>
                         {/* <h6 style={{ marginTop: '6%' }}>dummy tutorial</h6> */}
-                        <a href={"" + course.ZoomLink} target="_blank">
+                        <a href={"" + tutorial.ZoomLink} target="_blank">
                           <Button
                             style={{
                               background:
@@ -409,18 +409,57 @@ function Home() {
                             Open Link
                           </Button>
                         </a>
-                        <Button
-                          style={{
-                            background:
-                              "linear-gradient(0deg, #F47500, #F47500), #FFFFFF",
-                            width: "75%",
-                            margin: "auto",
-                            marginTop: "6%",
-                          }}
-                          onClick={sendEmail}
-                        >
-                          Send to Email
-                        </Button>
+                        <Form onSubmit={sendEmail}>
+                          <input
+                            type="hidden"
+                            name="to_name"
+                            defaultValue={name.f_name + " " + name.l_name}
+                          ></input>
+                          <input
+                            type="hidden"
+                            name="course_name"
+                            defaultValue={
+                              tutorial.CourseID + " " + tutorial.CourseName
+                            }
+                          ></input>
+                          <input
+                            type="hidden"
+                            name="time"
+                            defaultValue={tutorial.ClassStart}
+                          ></input>
+                          <input
+                            type="hidden"
+                            name="classroom"
+                            defaultValue={tutorial.Location}
+                          ></input>
+                          <input
+                            type="hidden"
+                            name="message"
+                            defaultValue={tutorial.Message}
+                          ></input>
+                          <input
+                            type="hidden"
+                            name="zoom-link"
+                            defaultValue={"" + tutorial.ZoomLink}
+                          ></input>
+                          <input
+                            type="hidden"
+                            name="to_email"
+                            defaultValue={name.email}
+                          ></input>
+                          <Button
+                            style={{
+                              background:
+                                "linear-gradient(0deg, #F47500, #F47500), #FFFFFF",
+                              width: "80%",
+                              margin: "auto",
+                              marginTop: "6%",
+                            }}
+                            type="submit"
+                          >
+                            Send to Email
+                          </Button>
+                        </Form>
                       </Row>
                     </Col>
                   </Row>
