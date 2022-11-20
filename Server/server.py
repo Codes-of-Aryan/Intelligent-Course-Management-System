@@ -208,7 +208,7 @@ def courseDetails():
 # Query6 to Get ALL LOGIN HISTORY
 
 my_cursor.execute(
-    "SELECT loginDate,loginTime,loginDuration FROM LoginHistory WHERE UID = " + uid + ";"   
+    "SELECT loginTimeStamp, loginDuration_in_minutes FROM LoginHistory WHERE UID = " + uid + ";"   
 )
 values6 = my_cursor.fetchall()
 # print(values5)Q
