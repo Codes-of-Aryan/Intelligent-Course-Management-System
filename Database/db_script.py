@@ -346,8 +346,8 @@ my_cursor.execute("""
 
    CREATE TABLE LoginHistory(
         UID varchar(255) NOT NULL,
-        Login_Timestamp timestamp NOT NULL,
-        Login_Duration_In_Minutes int NOT NULL,
+        loginTimeStamp timestamp NOT NULL,
+        loginDuration int NOT NULL,
         PRIMARY KEY (loginTimestamp, UID),
         FOREIGN KEY (UID) REFERENCES Student (UID)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
