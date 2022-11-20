@@ -126,10 +126,6 @@ def ohc():
         ZoomLink="-", Slides="-")
 
 
-
-
-
-
 # Query3 to get course details within 1hr tutorial 
 
 # SELECT C.CourseID, C.course_Name, C.Tutorial_Location, C.Tutorial_Start_Time, C.Tutorial_End_Time, 
@@ -159,16 +155,6 @@ def oht():
         ZoomLink="-", Slides="-")
 
 
-# Done till here
-
-
-
-
-
-
-
-
-
 # Query4 to get course name and course code for profile page of user
 my_cursor.execute(
     "SELECT T.CourseID, C.course_Name FROM (Student S, Takes T, Course C) WHERE (S.UID = T.UID)  AND (C.CourseID = T.CourseID) AND (S.UID = " + uid + ");"
@@ -188,11 +174,6 @@ def courses():
     return jsonify(courseDetails = c_details)
 
 
-
-
-# SMARAN'S WORK
-
-
 # Query5 to get Course details for all courses
 
 # SELECT C.CourseID, C.course_Name, C.Consultation_Location, C.Consultation_Time, C.Consultation_Day, C.Lecture_Location, C.Lecture_Day, C.Lecture_Start_Time, C.Lecture_End_Time, C.Tutorial_Day, C.Tutorial_Start_Time, C.Tutorial_End_Time, C.Tutorial_Location, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide, CCLM.Tutorial_Slide
@@ -203,8 +184,6 @@ def courses():
 # AND CM.CourseID = C.courseID 
 # AND CC.CourseID = C.courseID
 # AND C.courseID = CCLM.courseID;
-
-
 
 my_cursor.execute(
     "SELECT C.CourseID, C.course_Name, C.Consultation_Location, C.Consultation_Time, C.Consultation_Day, C.Lecture_Location, C.Lecture_Day, C.Lecture_Start_Time, C.Lecture_End_Time, C.Tutorial_Location, C.Tutorial_Day, C.Tutorial_Start_Time, C.Tutorial_End_Time, CM.Message, CC.Zoom_Link, CCLM.Lecture_Slide, CCLM.Tutorial_Slide FROM (Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM) WHERE (S.UID = " + uid + ") AND (S.UID = T.UID)  AND (C.CourseID = T.CourseID) AND (CM.CourseID = C.courseID) AND (CC.CourseID = C.courseID) AND (CCLM.CourseID = C.courseID);"
@@ -226,8 +205,16 @@ def courseDetails():
 
 
 
+# Query6 to Get ALL LOGIN HISTORY
 
-
+my_cursor.execute(
+    "SELECT loginDate,loginTime,loginDuration FROM LoginHistory WHERE UID = " + uid + ";"   
+)
+values6 = my_cursor.fetchall()
+# print(values5)Q
+@app.route('/login-details')
+def loginDetails():
+    return jsonify(#ADD HERE -> MULTIPLE ROW RETURN#)
 
 # DO NOT READ BELOW THIS
 

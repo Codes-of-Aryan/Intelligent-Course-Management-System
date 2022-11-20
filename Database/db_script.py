@@ -353,6 +353,7 @@ my_cursor.execute("""
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ;""")
 
+
 my_cursor.execute("""
 
 INSERT INTO LoginHistory VALUES ('3035756579', '2022-11-19', '18:02:00', '01:03:00'), 
