@@ -32,6 +32,7 @@ my_cursor.execute("""
         PRIMARY KEY (DepartmentName)
 
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 ;""")
 
 my_cursor.execute("""
@@ -99,6 +100,7 @@ my_cursor.execute("""
         PRIMARY KEY (StaffID),
         FOREIGN KEY (DepartmentName) REFERENCES Department (DepartmentName) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    
 ;""")
 
 
