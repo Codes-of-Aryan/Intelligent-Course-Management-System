@@ -5,7 +5,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "011110067",  #change password to your own
+    password = "uwwUyFgX",  #change password to your own
     auth_plugin='mysql_native_password',
 )
 
@@ -346,20 +346,20 @@ my_cursor.execute("""
 
    CREATE TABLE LoginHistory(
         UID varchar(255) NOT NULL,
-        loginDate date NOT NULL,
-        loginTime time NOT NULL,
-        loginDuration time NOT NULL,
-        PRIMARY KEY (loginDate, loginTime, UID)
+        Login_Timestamp timestamp NOT NULL,
+        Login_Duration_In_Minutes int NOT NULL,
+        PRIMARY KEY (loginTimestamp, UID),
+        FOREIGN KEY (UID) REFERENCES Student (UID)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ;""")
 
 
 my_cursor.execute("""
 
-INSERT INTO LoginHistory VALUES ('3035756579', '2022-11-19', '18:02:00', '01:03:00'), 
-                                ('3035756579', '2022-11-19', '17:30:00', '02:15:00'),
-                                ('3035756579', '2022-11-17', '16:29:00', '03:09:00'),
-                                ('3035756579', '2022-11-16', '14:18:00', '06:45:00')
+INSERT INTO LoginHistory VALUES ('3035756579', '2022-11-19 14:00:20', '60'), 
+                                ('3035756579', '2022-11-19 17:30:00', '40'),
+                                ('3035756579', '2022-11-17 16:29:00', '200'),
+                                ('3035756579', '2022-11-16 14:18:00', '120')
 ;""")
 
 mydb.commit()
