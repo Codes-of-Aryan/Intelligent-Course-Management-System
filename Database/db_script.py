@@ -281,25 +281,25 @@ my_cursor.execute("""
 my_cursor.execute("""
 
 INSERT INTO CourseContentLectureMaterial VALUES ('COMP3330', 
-'lecture1.pdf', 'tutorial1.pdf')
+'https://connecthkuhk-my.sharepoint.com/:b:/g/personal/divtej17_connect_hku_hk/EYMLtIF26LhPuwPlmvf8YOwBQv2ZPEcnBtofUw1hP5NlkA?e=XzfdlO', 'https://connecthkuhk-my.sharepoint.com/:b:/g/personal/divtej17_connect_hku_hk/EZfYl0awxC5AiyPV-uEJU6gBdxMPkAsIlD9vyka9Grdcpg?e=ewH2Ci')
 
 ;""")
 
 my_cursor.execute("""
 INSERT INTO CourseContentLectureMaterial VALUES ('COMP3234', 
-'lecture1.pdf', 'tutorial1.pdf')
+'https://connecthkuhk-my.sharepoint.com/:b:/g/personal/divtej17_connect_hku_hk/EYMLtIF26LhPuwPlmvf8YOwBQv2ZPEcnBtofUw1hP5NlkA?e=XzfdlO', 'https://connecthkuhk-my.sharepoint.com/:b:/g/personal/divtej17_connect_hku_hk/EZfYl0awxC5AiyPV-uEJU6gBdxMPkAsIlD9vyka9Grdcpg?e=ewH2Ci')
 
 ;""")
 
 my_cursor.execute("""
 INSERT INTO CourseContentLectureMaterial VALUES ('COMP3278', 
-'lecture1.pdf', 'tutorial1.pdf')
+'https://connecthkuhk-my.sharepoint.com/:b:/g/personal/divtej17_connect_hku_hk/EYMLtIF26LhPuwPlmvf8YOwBQv2ZPEcnBtofUw1hP5NlkA?e=XzfdlO', 'https://connecthkuhk-my.sharepoint.com/:b:/g/personal/divtej17_connect_hku_hk/EZfYl0awxC5AiyPV-uEJU6gBdxMPkAsIlD9vyka9Grdcpg?e=ewH2Ci')
 
 ;""")
 
 my_cursor.execute("""
 INSERT INTO CourseContentLectureMaterial VALUES ('COMP2119', 
-'lecture1.pdf', 'tutorial1.pdf')
+'https://connecthkuhk-my.sharepoint.com/:b:/g/personal/divtej17_connect_hku_hk/EYMLtIF26LhPuwPlmvf8YOwBQv2ZPEcnBtofUw1hP5NlkA?e=XzfdlO', 'https://connecthkuhk-my.sharepoint.com/:b:/g/personal/divtej17_connect_hku_hk/EZfYl0awxC5AiyPV-uEJU6gBdxMPkAsIlD9vyka9Grdcpg?e=ewH2Ci')
 
 ;""")
 
