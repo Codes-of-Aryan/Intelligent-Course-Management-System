@@ -214,7 +214,19 @@ values6 = my_cursor.fetchall()
 # print(values5)Q
 @app.route('/login-details')
 def loginDetails():
-    return jsonify()#ADD HERE -> MULTIPLE ROW RETURN#
+    l_date = []
+    l_time = []
+    l_duration = []
+    l_all = []
+
+    for i in valuesx:
+        l_date.append(str(i[0]))
+        l_time.append(str(i[1]))
+        l_duration.append(str(i[2]))
+
+    for i in range(len(l_date)):
+        l_all.append(l_date[i] + " " + l_time[i] + " " + l_duration[i])
+    return jsonify(loginDetails = l_all)
 
 # DO NOT READ BELOW THIS
 
