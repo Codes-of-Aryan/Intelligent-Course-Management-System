@@ -57,6 +57,7 @@ function Home() {
     emailjs.sendForm('service_av48ilq', 'template_g0d1df8', e.target, "O_SDXFxXZ7q-0HL37")
     .then((result) => {
       console.log(result.text);
+      alert("Email sent successfully!");
     }, (error) => {
       console.log(error.text);
     });
@@ -203,6 +204,7 @@ function Home() {
                       <input type="hidden" name="classroom" defaultValue={course.Location}></input>
                       <input type="hidden" name="message" defaultValue={course.Message}></input>
                       <input type="hidden" name="zoom-link" defaultValue={"" + course.ZoomLink}></input>
+                      <input type="hidden" name="to_email" defaultValue={name.email}></input>
                       <Button
                         style={{
                           background:
