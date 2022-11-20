@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Button, Card } from "react-bootstrap";
+import { Container, Row, Col, Button, Card, Form } from "react-bootstrap";
 import profilePhoto from "../assets/user.png";
 import loginActivity from "../assets/loginactivity.png";
 import logout from "../assets/logout.png";
@@ -9,6 +9,7 @@ import weeklySchedule from "../assets/weeklyschedule.png";
 import arrows from "../assets/arrows.png";
 import zoom from "../assets/zoom.png";
 import { Link } from "react-router-dom";
+import emailjs from "emailjs-com";
 
 function Home() {
   const [name, setName] = useState([]);
@@ -47,8 +48,19 @@ function Home() {
     .then((res) => res.json())
     .then((info) => {
       setCourseList(info);
-      console.log(courseList);
+      // console.log(courseList);
     });
+
+  function sendEmail(e) {
+    e.preventDefault();
+
+    emailjs.sendForm('service_av48ilq', 'template_g0d1df8', e.target, "O_SDXFxXZ7q-0HL37")
+    .then((result) => {
+      console.log(result.text);
+    }, (error) => {
+      console.log(error.text);
+    });
+  }
 
   return (
     <Container fluid style={{ background: "#C3EAFB" }}>
@@ -119,7 +131,7 @@ function Home() {
                       <h5 style={{ fontWeight: "bold" }}>Course</h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "40%" }}>
+                      <h6 style={{ marginTop: "40%" }} name="course_name">
                         {course.CourseID + " " + course.CourseName}
                       </h6>
                     </Row>
@@ -129,7 +141,7 @@ function Home() {
                       <h5 style={{ fontWeight: "bold" }}>Time</h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "40%" }}>{course.ClassStart}</h6>
+                      <h6 style={{ marginTop: "40%" }} name="time">{course.ClassStart}</h6>
                     </Row>
                   </Col>
                   <Col className="col-2">
@@ -137,7 +149,7 @@ function Home() {
                       <h5 style={{ fontWeight: "bold" }}>Classroom</h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "40%" }}>{course.Location}</h6>
+                      <h6 style={{ marginTop: "40%" }} name="classroom">{course.Location}</h6>
                     </Row>
                   </Col>
                   <Col className="col-2">
@@ -155,7 +167,7 @@ function Home() {
                       <h5 style={{ fontWeight: "bold" }}>Notes from Teacher</h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "40%" }}>{course.Message}</h6>
+                      <h6 style={{ marginTop: "40%" }} name="message">{course.Message}</h6>
                     </Row>
                   </Col>
                   <Col className="col-2">
@@ -171,7 +183,7 @@ function Home() {
                     </Row>
                     <Row style={{ display: "flex", flexDirection: "column" }}>
                       {/* <h6 style={{ marginTop: '6%' }}>dummy course</h6> */}
-                      <a href={"" + course.ZoomLink} target="_blank">
+                      <a href={"" + course.ZoomLink} target="_blank" name="zoom-link">
                         <Button
                           style={{
                             background:
@@ -184,6 +196,13 @@ function Home() {
                           Open Link
                         </Button>
                       </a>
+                      <Form onSubmit={sendEmail}>
+                      <input type="hidden" name="to_name" defaultValue={name.f_name + " " + name.l_name}></input>
+                      <input type="hidden" name="course_name" defaultValue={course.CourseID + " " + course.CourseName}></input>
+                      <input type="hidden" name="time" defaultValue={course.ClassStart}></input>
+                      <input type="hidden" name="classroom" defaultValue={course.Location}></input>
+                      <input type="hidden" name="message" defaultValue={course.Message}></input>
+                      <input type="hidden" name="zoom-link" defaultValue={"" + course.ZoomLink}></input>
                       <Button
                         style={{
                           background:
@@ -192,9 +211,11 @@ function Home() {
                           margin: "auto",
                           marginTop: "6%",
                         }}
+                        type="submit"
                       >
                         Send to Email
                       </Button>
+                      </Form>
                     </Row>
                   </Col>
                 </Row>
@@ -281,6 +302,7 @@ function Home() {
                           margin: "auto",
                           marginTop: "6%",
                         }}
+                        onClick={sendEmail}
                       >
                         Send to Email
                       </Button>
