@@ -56,50 +56,57 @@ class Calendar extends Component {
     const events = [
       {
         id: 1,
-        text: "Event 1",
-        start: "2023-03-07T10:30:00",
-        end: "2023-03-07T13:00:00"
+        text: "COMP3278 - Tutorial",
+        start: "2022-11-21T14:30:00",
+        end: "2022-11-21T15:20:00"
       },
       {
         id: 2,
-        text: "Event 2",
-        start: "2023-03-08T09:30:00",
-        end: "2023-03-08T11:30:00",
+        text: "COMP3330 - Lecture",
+        start: "2022-11-21T12:30:00",
+        end: "2022-11-21T14:30:00",
         backColor: "#6aa84f"
       },
       {
         id: 3,
-        text: "Event 3",
-        start: "2023-03-08T12:00:00",
-        end: "2023-03-08T15:00:00",
+        text: "COMP3278 - Lecture",
+        start: "2022-11-24T13:30:00",
+        end: "2022-11-24T15:30:00",
         backColor: "#f1c232"
       },
       {
         id: 4,
-        text: "Event 4",
-        start: "2023-03-06T11:30:00",
-        end: "2023-03-06T14:30:00",
+        text: "COMP3330 - Tutorial",
+        start: "2022-11-24T12:30:00",
+        end: "2022-11-24T13:30:00",
         backColor: "#cc4125"
       },
       {
         id: 5,
-        text: "Event 5",
-        start: "2023-03-13T11:30:00",
-        end: "2023-03-13T14:30:00",
+        text: "COMP2119 - Lecture",
+        start: "2022-11-22T09:30:00",
+        end: "2022-11-22T12:30:00",
         backColor: "#cc4125"
       },
       {
         id: 6,
-        text: "Event 6",
-        start: "2023-03-14T11:30:00",
-        end: "2023-03-14T14:30:00",
+        text: "COMP2119 - Tutorial",
+        start: "2022-11-20T20:30:00",
+        end: "2022-11-20T21:20:00",
         backColor: "#f1c232"
       },
       {
         id: 7,
-        text: "Event 7",
-        start: "2023-03-16T11:30:00",
-        end: "2023-03-16T14:30:00",
+        text: "COMP3234 - Lecture",
+        start: "2022-11-23T10:30:00",
+        end: "2022-11-23T12:20:00",
+        backColor: "#6aa84f"
+      },
+      {
+        id: 8,
+        text: "COMP3234 - Tutorial",
+        start: "2022-11-25T13:30:00",
+        end: "2022-11-25T14:20:00",
         backColor: "#6aa84f"
       },
     ];
@@ -118,8 +125,8 @@ class Calendar extends Component {
             selectMode={"week"}
             showMonths={3}
             skipMonths={3}
-            startDate={"2023-03-07"}
-            selectionDay={"2023-03-07"}
+            startDate={"2022-11-21"}
+            selectionDay={"2022-11-21"}
             onTimeRangeSelected={ args => {
               this.calendar.update({
                 startDate: args.day

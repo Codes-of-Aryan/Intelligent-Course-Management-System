@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import profilePhoto from "../assets/user.png";
 import loginActivity from "../assets/loginactivity.png";
@@ -9,6 +9,7 @@ import weeklySchedule from "../assets/weeklyschedule.png";
 import arrows from "../assets/arrows.png";
 import zoom from "../assets/zoom.png";
 import { Link, useLocation } from "react-router-dom";
+import Header from "../components/Header";
 
 function MyCourses() {
   const location = useLocation();
@@ -19,10 +20,10 @@ function MyCourses() {
   const [courseDetail, setCourseDetail] = useState([]);
 
   fetch("/course-details")
-  .then((res) => res.json())
-  .then((info) => {
-    setCourseDetail(info);
-  });
+    .then((res) => res.json())
+    .then((info) => {
+      setCourseDetail(info);
+    });
   // const [courses, setCourses] = useState([]);
 
   // useEffect(() => {
@@ -43,6 +44,8 @@ function MyCourses() {
   // );
 
   return (
+    <>
+    <Header />
     <Container fluid style={{ background: "#C3EAFB", height: "100vh" }}>
       <h1
         style={{
@@ -64,16 +67,18 @@ function MyCourses() {
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             }}
           >
-          <Link to="/course-detail" state={courseDetail}><Card.Body
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                textAlign: "right",
-              }}
-            >
-              <h3 style={{ fontWeight: "bold" }}>{courses.courseDetails[0]}</h3>
-            </Card.Body></Link>
+              <Card.Body
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  textAlign: "right",
+                }}
+              >
+                <h3 style={{ fontWeight: "bold" }}>
+                  {courses.courseDetails[0]}
+                </h3>
+              </Card.Body>
           </Card>
         </Col>
         <Col>
@@ -106,7 +111,11 @@ function MyCourses() {
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             }}
           >
-            <Card.Body
+          <Link
+              to="/course-detail"
+              state={courseDetail}
+              style={{ textDecoration: "none", color: "black", margin: "auto" }}
+            ><Card.Body
               style={{
                 display: "flex",
                 flexDirection: "row",
@@ -115,7 +124,7 @@ function MyCourses() {
               }}
             >
               <h3 style={{ fontWeight: "bold" }}>{courses.courseDetails[2]}</h3>
-            </Card.Body>
+            </Card.Body></Link>
           </Card>
         </Col>
       </Row>
@@ -143,6 +152,7 @@ function MyCourses() {
         </Col>
       </Row>
     </Container>
+    </>
   );
 }
 

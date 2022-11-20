@@ -3,9 +3,12 @@ import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Calendar from "../components/Calendar";
 import home from "../assets/home.png";
+import Header from "../components/Header";
 
 function Home() {
   return (
+    <>
+    <Header />
     <Container fluid style={{ background: "#C3EAFB" }}>
       <h1
         style={{
@@ -49,6 +52,7 @@ function Home() {
             </Card>
           </Link>
     </Container>
+    </>
   );
 }
 

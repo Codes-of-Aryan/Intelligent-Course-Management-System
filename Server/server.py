@@ -218,13 +218,13 @@ def loginDetails():
     l_duration = []
     l_all = []
 
-    for i in valuesx:
+    for i in values6:
         l_timestamp.append(str(i[0]))
         l_duration.append(str(i[1]))
 
-    for i in range(len(l_timestamp)):
-        l_all.append(l_timestamp[i] + " " + l_duration[i] + " " + l_duration[i])
-    return jsonify(loginDetails = l_all)
+    # for i in range(len(l_timestamp)):
+    #     l_all.append(l_timestamp[i] + " " + l_duration[i])
+    return jsonify(timeStamp = l_timestamp, duration = l_duration)
 
 # DO NOT READ BELOW THIS
 

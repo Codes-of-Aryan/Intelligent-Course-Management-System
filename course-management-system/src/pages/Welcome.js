@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import logo from "../assets/logo.png";
+import logo from "../assets/headerlogo.png";
 import { Link } from "react-router-dom";
 
 function Home() {
@@ -13,15 +13,14 @@ function Home() {
               src={logo}
               alt="Avatar"
               style={{
-                width: "200px",
-                height: "170px",
                 borderRadius: "15%",
                 margin: "auto",
               }}
             />
           </Row>
-          <Row style={{ height: "50vh", textAlign: "center" }}>
-            <h1 style={{ fontWeight: "bold" }}>Web App Name</h1>
+          <Row style={{ textAlign: "center" }}>
+            <h1 style={{ fontWeight: "bold" }}>Intelligent Course Management System</h1>
+            <h6 style={{ fontWeight: "bold" }}><em>Developed by Group 33 (COMP3278A[2022] - Semester 1)</em></h6>
           </Row>
         </Col>
         <Col>

@@ -5,7 +5,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "uwwUyFgX",  #change password to your own
+    password = "011110067",  #change password to your own
     auth_plugin='mysql_native_password',
 )
 
@@ -169,8 +169,8 @@ INSERT INTO Course VALUES ('COMP3330', 'Introduction to Mobile App Development',
 my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP3234', 'Computer Networks', 
-'Haking Wong RM#121', '14:30-16:30' ,'Friday', 'Saturday', '23:06', '11:20', 'CYPP2',
-'Sunday', '5:30', '10:20', 'CYPP2', 3)
+'Haking Wong RM#121', '14:30-16:30' ,'Friday', 'Wednesday', '10:30', '12:20', 'CYPP2',
+'Friday', '13:30', '14:20', 'CYPP2', 3)
 
 ;""")
 
@@ -178,7 +178,7 @@ my_cursor.execute("""
 
 INSERT INTO Course VALUES ('COMP2119', 'Data Structures and Algorithms', 
 'KKLG838', '14:30-16:30' ,'Wednesday', 'Tuesday', '13:30', '16:20', 'KKLG603',
-'Saturday', '21:30', '12:20', 'KKLG604', 4)
+'Sunday', '20:30', '21:20', 'KKLG604', 4)
 
 ;""")
 
@@ -357,7 +357,7 @@ my_cursor.execute("""
 my_cursor.execute("""
 
 INSERT INTO LoginHistory VALUES ('3035756579', '2022-11-19 14:00:20', '60'), 
-                                ('3035756579', '2022-11-19 17:30:00', '40'),
+                                ('3035756579', '2022-11-18 17:30:00', '40'),
                                 ('3035756579', '2022-11-17 16:29:00', '200'),
                                 ('3035756579', '2022-11-16 14:18:00', '120')
 ;""")

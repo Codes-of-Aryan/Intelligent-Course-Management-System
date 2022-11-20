@@ -1,10 +1,18 @@
 import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import home from "../assets/home.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import Header from "../components/Header";
 
 function LoginActivity() {
+  const location = useLocation();
+  console.log(location.state);
+  const login = location.state;
+  console.log(login);
+
   return (
+    <>
+    <Header />
     <Container fluid style={{ background: "#C3EAFB" }}>
       <Row style={{ height: "100vh", textAlign: "center" }}>
         <Col>
@@ -13,36 +21,38 @@ function LoginActivity() {
             <Card.Body>
               <Container>
                 <Row>
-                  <Col className="col-3">
+                  <Col className="col-6">
                     <Row>
-                      <h5 style={{ fontWeight: "bold" }}>Login Date</h5>
+                      <h5 style={{ fontWeight: "bold" }}>Login Timestamp</h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "15%" }}>dummy course</h6>
-                    </Row>
-                  </Col>
-                  <Col className="col-3">
-                    <Row>
-                      <h5 style={{ fontWeight: "bold" }}>Login Time</h5>
+                      <h6 style={{ marginTop: "15%" }}>{login.timeStamp[0]}</h6>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "15%" }}>dummy course</h6>
-                    </Row>
-                  </Col>
-                  <Col className="col-3">
-                    <Row>
-                      <h5 style={{ fontWeight: "bold" }}>Logout Time</h5>
+                      <h6 style={{ marginTop: "15%" }}>{login.timeStamp[1]}</h6>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "15%" }}>dummy course</h6>
+                      <h6 style={{ marginTop: "15%" }}>{login.timeStamp[2]}</h6>
+                    </Row>
+                    <Row>
+                      <h6 style={{ marginTop: "15%" }}>{login.timeStamp[3]}</h6>
                     </Row>
                   </Col>
-                  <Col className="col-3">
+                  <Col className="col-6">
                     <Row>
-                      <h5 style={{ fontWeight: "bold" }}>Total Time Spent</h5>
+                      <h5 style={{ fontWeight: "bold" }}>Login Duration</h5>
                     </Row>
                     <Row>
-                      <h6 style={{ marginTop: "15%" }}>dummy course</h6>
+                      <h6 style={{ marginTop: "15%" }}>{login.duration[0]}</h6>
+                    </Row>
+                    <Row>
+                      <h6 style={{ marginTop: "15%" }}>{login.duration[1]}</h6>
+                    </Row>
+                    <Row>
+                      <h6 style={{ marginTop: "15%" }}>{login.duration[2]}</h6>
+                    </Row>
+                    <Row>
+                      <h6 style={{ marginTop: "15%" }}>{login.duration[3]}</h6>
                     </Row>
                   </Col>
                 </Row>
@@ -81,6 +91,7 @@ function LoginActivity() {
         </Col>
       </Row>
     </Container>
+    </>
   );
 }
 

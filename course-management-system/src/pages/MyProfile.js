@@ -11,6 +11,7 @@ import zoom from "../assets/zoom.png";
 import userDetails from "../assets/userdetails.png";
 import coursedetails from "../assets/coursedetails.png";
 import { Link, useLocation } from "react-router-dom";
+import Header from "../components/Header";
 
 function MyProfile() {
   const location = useLocation();
@@ -31,6 +32,8 @@ function MyProfile() {
 
 
   return (
+    <>
+    <Header />
     <Container fluid style={{ background: "#C3EAFB", height: "100vh" }}>
       <h1
         style={{
@@ -67,7 +70,7 @@ function MyProfile() {
               src={userDetails}
               style={{ height: "40px", width: "30px", marginRight: "2%" }}
             ></img>
-            <h4 style={{ color: "#D6CD06" }}>User Details</h4>
+            <h4 style={{ color: "black" }}>User Details</h4>
           </div>
           <Card style={{ marginRight: "8%" }}>
             <Card.Body>
@@ -146,7 +149,13 @@ function MyProfile() {
         </Col>
       </Row>
       <Row style={{ alignItems: "center", textAlign: "center" }}>
-        <h3 style={{ marginTop: "2%" }}>Navigation</h3>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+            <img
+              src={coursedetails}
+              style={{ height: "40px", width: "30px", marginRight: "1%", marginLeft: '6%' }}
+            ></img>
+            <h4 style={{ color: "black" }}>Course Details</h4>
+          </div>
         <Card style={{ width: "90%", margin: "auto" }}>
           <Card.Body>
           <h5>{courses.courseDetails[0]}</h5>
@@ -157,6 +166,7 @@ function MyProfile() {
         </Card>
       </Row>
     </Container>
+    </>
   );
 }
 
