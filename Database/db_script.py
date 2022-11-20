@@ -1,3 +1,5 @@
+INSERT_SQL_PASSWORD = 'PASSWORD' # change password to your own
+
 import mysql.connector
 # Connects to database
 # The .db file is created automatically if it does not exist 
@@ -5,15 +7,16 @@ import mysql.connector
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "011110067",  #change password to your own
+    password = INSERT_SQL_PASSWORD, 
     auth_plugin='mysql_native_password',
 )
 
 my_cursor = mydb.cursor()
 
-my_cursor.execute(
-    "DROP DATABASE Alpha"
-    )
+# DEBUGGING SNIPPET
+# my_cursor.execute(
+#     "DROP DATABASE Alpha"
+#     )
 
 my_cursor.execute(
     "CREATE DATABASE Alpha"

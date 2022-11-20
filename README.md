@@ -18,9 +18,11 @@ Contributors:
 
 3. To run the Frontend (React): 
     - Go to the directory course-management-system and use the command <i>npm start</i> 
+    - Note, Please make sure you go to localhost:3000/welcome to start the web application
 
 4. To run the Backend (Flask): 
     - <i>python server.py</i> in the Server directory
+    - Please also change the password and username in the server.py file with your local sql username and password
 
 Note - some local machines might require <i>'python3 filename.py'</i> instead of <i>'python filename.py'</i>, depending on which version of python is set as default 
 

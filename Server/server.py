@@ -1,5 +1,7 @@
+INSERT_SQL_PASSWORD = 'PASSWORD' # change password to your own
+
 from flask import Flask, jsonify
-# from flask_mysql_connector import MySQL
+from flask_mysql_connector import MySQL
 
 import mysql.connector
 
@@ -15,23 +17,11 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir + '/FaceRecognition')
 from faces import recognize
 
-'''
-Sample way of using the Facial recognition 
-This would simply return the name of the user 
-detected by the recognition back to this file  
-in the file '''
-
-# name = recognize()
-name = 'Abdur,3035756579'
+name = recognize()
+#name = 'Abdur,3035756579'
 start_time = datetime.now()
 
-
-
-
-# print(name)
-
 uid = name.split(',')[1]
-# print(uid)
 
 
 app = Flask(__name__)
@@ -75,7 +65,7 @@ app = Flask(__name__)
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="011110067",  # change password to your own
+    passwd= INSERT_SQL_PASSWORD,  
     auth_plugin='mysql_native_password'
 )
 # create cursor object
@@ -142,7 +132,6 @@ my_cursor.execute(
     "SELECT C.CourseID, C.course_Name, C.Tutorial_Location, C.Tutorial_Start_Time, C.Tutorial_End_Time, CM.Message, CC.Zoom_Link, CCLM.Tutorial_Slide FROM (Student S, Course C, CourseMessage CM, takes T, CourseContent CC, CourseContentLectureMaterial CCLM) WHERE (S.UID = " + uid + ") AND (S.UID = T.UID) AND (C.CourseID = T.CourseID) AND (CM.CourseID = C.courseID) AND (CC.CourseID = C.courseID) AND (CCLM.CourseID = C.courseID) AND (C.Tutorial_Day = DAYNAME(Current_Date())) AND ((SELECT EXTRACT(HOUR FROM (SELECT SUBTIME (C.Tutorial_Start_Time, CURRENT_TIME)))) = 0); "
 )
 values3 = my_cursor.fetchall()
-# print(values3)
 @app.route('/one-hour-tutorial')
 def oht():
     if (len(values3) != 0):
@@ -197,13 +186,6 @@ def courseDetails():
     LectureDay=values5[0][9], LectureStartTime=str(values5[0][10]), LectureEndTime=str(values5[0][11]), TutorialLocation=values5[0][12], 
     TutorialDay=values5[0][13], TutorialStartTime=str(values5[0][14]), TutorialEndTime=str(values5[0][15]), Message=values5[0][16], 
     ZoomLink=values5[0][17], LectureSlides=values5[0][18], TutorialSlides=values5[0][19], ProfessorDepartment=values5[0][20])
-
-
-
-
-
-
-
 
 # Query6 to Get ALL LOGIN HISTORY
 
