@@ -2,6 +2,7 @@ INSERT_SQL_PASSWORD = 'PASSWORD' # change password to your own
 
 from flask import Flask, jsonify
 from flask_mysql_connector import MySQL
+import requests
 
 import mysql.connector
 
@@ -19,10 +20,16 @@ from faces import recognize
 
 app = Flask(__name__)
 
+name = 'Abdur,3035756579' #temporary name and uid
+#only to initialize variables, this and all other 
+#variable values will get replaced after login with 
+#the correct values. 
+
 @app.route('/login', methods=['GET'])
 def login():
-    global name
+    global name, start_time
     name = check()
+    start_time = datetime.now()
     print('THE NAME IS ', name)
     if (name == "UNKNOWN"):
         return {"login": "Failure"}
@@ -34,6 +41,7 @@ def login():
 def check():
     name = recognize()
     return name
+
 
 start_time = datetime.now()
 uid = name.split(',')[1]
@@ -281,13 +289,6 @@ def loginDetails():
 # values = my_cursor.fetchall()
 # print(values)
 
-# # ABDUR CHANGE THE APP.ROUTE HERE
-# # ABDUR CHANGE THE APP.ROUTE HERE
-# # ABDUR CHANGE THE APP.ROUTE HERE
-# # ABDUR CHANGE THE APP.ROUTE HERE
-# # ABDUR CHANGE THE APP.ROUTE HERE
-# # ABDUR CHANGE THE APP.ROUTE HERE
-# # ABDUR CHANGE THE APP.ROUTE HERE
 # @app.route('/one-hour-tutorial') # ABDUR CHANGE THE APP.ROUTE HERE
 # def oneHourTutorial():
 #     return jsonify(CourseID=values[0][0], CourseName=values[0][1], Location=values[0][2], 
@@ -311,19 +312,13 @@ def loginDetails():
 # AND CM.CourseID = C.courseID 
 # AND CC.CourseID = C.courseID;
 
-
-# Smaran, Divtej thinking how to implement login time
-
-
-
-login_duration = datetime.now().minute - start_time.minute
-
-
-
-sql_insert_query = """ INSERT INTO LoginHistory VALUES (%s, %s, %s) """
-
-tuple1 = (uid, start_time, login_duration)
-my_cursor.execute(sql_insert_query, tuple1)
+@app.route('/logout', methods=['POST'])
+def logout(): 
+    login_duration = datetime.now().minute - start_time.minute
+    print('login_duration is ', login_duration)
+    sql_insert_query = """ INSERT INTO LoginHistory VALUES (%s, %s, %s) """
+    tuple1 = (uid, start_time, login_duration)
+    my_cursor.execute(sql_insert_query, tuple1)
 
 
 if __name__ == '__main__':
