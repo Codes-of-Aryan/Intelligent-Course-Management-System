@@ -17,14 +17,31 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir + '/FaceRecognition')
 from faces import recognize
 
-name = recognize()
-#name = 'Abdur,3035756579'
-start_time = datetime.now()
+#name = recognize()
+name = 'Abdur,3035756579'
 
-uid = name.split(',')[1]
 
 
 app = Flask(__name__)
+
+@app.route('/login', methods=['GET'])
+def login():
+    global name
+    name = check()
+    print('THE NAME IS ', name)
+    if (name == "UNKNOWN"):
+        return {"login": "Failure"}
+    else:
+        return {
+            "login": "Success",
+        }
+
+def check():
+    name = recognize()
+    return name
+
+start_time = datetime.now()
+uid = name.split(',')[1]
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:mehyr@SIS11@localhost/Alpha'
 # app.config['MYSQL_USER'] = 'root'
