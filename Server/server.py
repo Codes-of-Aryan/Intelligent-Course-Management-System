@@ -17,11 +17,6 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir + '/FaceRecognition')
 from faces import recognize
 
-#name = recognize()
-name = 'Abdur,3035756579'
-
-
-
 app = Flask(__name__)
 
 @app.route('/login', methods=['GET'])
@@ -321,7 +316,15 @@ def loginDetails():
 
 
 
-login_duration = datetime.now() - start_time
+login_duration = datetime.now().minute - start_time.minute
+
+
+
+sql_insert_query = """ INSERT INTO LoginHistory VALUES (%s, %s, %s) """
+
+tuple1 = (uid, start_time, login_duration)
+my_cursor.execute(sql_insert_query, tuple1)
+
 
 if __name__ == '__main__':
     app.run(port=8000)
